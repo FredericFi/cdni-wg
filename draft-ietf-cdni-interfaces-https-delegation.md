@@ -65,10 +65,10 @@ entity:
 
 This document defines metadata objects to support delegating the delivery of
 HTTPS traffic between two or more interconnected CDNs.  Specifically, this
-document outlines CDNI Metadata interface objects for HTTPS delegation based on
+document outlines CDNI Metadata interface objects based on
 the interfaces for obtaining delegated certificates defined by RFC9115.  Using
 RFC9115-profiled ACME avoids the need to share private cryptographic key
-material between the involved entities, while also allowing the delegating CDN
+material between the involved entities. This also allows the delegating CDN
 to remain in full control of the delegation and revoke it at any time.
 
 --- middle
