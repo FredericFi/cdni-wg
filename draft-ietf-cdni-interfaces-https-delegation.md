@@ -179,34 +179,46 @@ short-term certificate bound to the master certificate.
                                                     '------------'
 ~~~
 
-TO BE REMOVED:
-
-~~~
-dCDN                  uCDN             Content Provider           CA
- |              ACME/STAR proxy        ACME/STAR client    ACME/STAR srv
- |                     |                     |                     |
- | 1. GET Metadata incl. Delegation Method object with CSR template|
- +-------------------->|                     |                     |
- | 200 OK + Metadata incl. CSR template [CDNI]                     |
- |<--------------------+                     |                     |
- | 2. Request delegation: video.dcdn.example + dCDN public key     |
- +-------------------->|                     |                     |
- |                     | 3. Request STAR Cert + dCDN public key    |
- |                     +-------------------->| 4. Request STAR cert|
- |                     |                     |    + Pubkey         |
- |                     |                     |-------------------->|
- |                     |                     | 5. STAR certificate |
- |                     | 6. STAR certificate |<--------------------|
- | 7. STAR certificate |<--------------------+                     |
- +<--------------------|                     |                     |
- |                     |                     |                     |
- | 8. Retrieve STAR certificate (credential-location-uri)          |
- +---------------------------------------------------------------->|
- |                     |                     |         9. renew +--|
- |                     |                     |            cert  |  |
- | 10. Star certificate                      |                  +->|
- |<----------------------------------------------------------------+
- |  ...                |                     |                     |
+~~~aasvg
+.----.                .----.               .----.                 .----.
+|dCDN|                |uCDN|               | CP |                 | CA |
+'-+--'                '-+--'               '--+-'                 '--+-'
+  |     GET metadata    |                     |                      |
+  +--------[CDNI]------>|                     |                      |
+  |   200 OK, metadata  |                     |                      |
+  |  (inc. dele config) |                     |                      |
+  |<-------[CDNI]-------+                     |                      |
+  |                     |                     |                      |
+  |    GET delegation   |                     |                      |
+  +-----[ACME dele]---->|                     |                      |
+  | 200 OK, delegation  |                     |                      |
+  | (inc. CSR template) |                     |                      |
+  |<----[ACME dele]-----+                     |                      |
+  |                     |                     |                      |
+  +----.                |                     |                      |
+  |    |                |                     |                      |
+  |  create key pair and|                     |                      |
+  |  CSR w/ delegated   |                     |                      |
+  |  name               |                     |                      |
+  |    |                |                     |                      |
+  |<---'                |                     |                      |
+  |                     |                     |                      |
+  |     POST Order1     |                     |                      |
+  +-----[ACME dele]---->|                     |                      |
+  |                     |   forward Order1    |                      |
+  |                     +-----[ACME dele]---->|                      |
+  |                     |                     |     POST Order2      |
+  |                     |                     +-----[ACME STAR]----->|
+  |                     |                     |                      |
+  |                     |                     |<---authorizations--->|
+  |                     |                     |                      |
+  |<---wait issuance--->|<---wait issuance--->|<---wait issuance---->|
+  |                                                                  |
+  |              (unauthenticated) GET star-certificate              |
+  +----------------------------------------------------------------->|
+  |                          certificate #1                          |
+  |<-----------------------------------------------------------------+
+  |                              ...                                 |
 ~~~
 {: #fig-call-flow artwork-align="center"
    title="Example call-flow of STAR delegation in CDNI showing 2 levels of delegation"}
