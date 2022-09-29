@@ -64,24 +64,24 @@ entity:
 --- abstract
 
 This document defines metadata objects to support delegating the delivery of
-HTTPS traffic between two or more interconnected CDNs.  Specifically, this
-document outlines CDNI Metadata interface objects based on
-the interfaces for obtaining delegated certificates defined by RFC9115.  Using
-RFC9115-profiled ACME avoids the need to share private cryptographic key
-material between the involved entities. This also allows the delegating CDN
-to remain in full control of the delegation and revoke it at any time.
+HTTPS content between two or more interconnected CDNs.  Specifically, this
+document defines CDNI Metadata interface objects to enable delegation of 
+of X.509 certificates. This document leverages delegation schemes defined in 
+RFC9115. RFC 9115 allows delegating entity to remain in full
+control of the delegation and be able to revoke the delegation any time and avoids 
+the need to share private cryptographic key material between the involved entities. 
 
 --- middle
 
 # Introduction
 
-Content delivery over HTTPS using one or more CDNs along the path requires
-credential management specifically when DNS-based redirection is used.  For
-example, an uCDN is delegating its credentials to a dCDN for content delivery.
+Content delivery over HTTPS using two or more CDNs along the path requires
+credential management specifically when DNS-based delegation is used.  For
+example, an upstream CDN (uCDN) is delegating its credentials to a downstream (dCDN) for content delivery.
 This specifically applies when an entity delegates delivery of encrypted
 content to another trusted entity.
 
-{{RFC9115}} defines a delegation method where the upstream Content Delivery
+{{RFC9115}} defines delegation methods where the upstream Content Delivery
 Network (uCDN), the holder of the domain, generates on- demand an X.509
 certificate for the downstream CDN (dCDN).  For further details, please refer
 to {{Section 1 of RFC9115}} and {{Section 5.1.2.1 of RFC9115}}.
