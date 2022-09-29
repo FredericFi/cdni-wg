@@ -65,11 +65,11 @@ entity:
 
 This document defines metadata objects to support delegating the delivery of
 HTTPS content between two or more interconnected CDNs.  Specifically, this
-document defines CDNI Metadata interface objects to enable delegation of 
-of X.509 certificates. This document leverages delegation schemes defined in 
+document defines CDNI Metadata interface objects to enable delegation of
+of X.509 certificates. This document leverages delegation schemes defined in
 RFC9115. RFC 9115 allows delegating entity to remain in full
-control of the delegation and be able to revoke the delegation any time and avoids 
-the need to share private cryptographic key material between the involved entities. 
+control of the delegation and be able to revoke the delegation any time and avoids
+the need to share private cryptographic key material between the involved entities.
 
 --- middle
 
