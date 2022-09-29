@@ -66,29 +66,25 @@ entity:
 This document defines metadata objects to support delegating the delivery of
 HTTPS content between two or more interconnected CDNs.  Specifically, this
 document defines CDNI Metadata interface objects to enable delegation of
-of X.509 certificates. This document leverages delegation schemes defined in
+X.509 certificates leveraging delegation schemes defined in
 RFC9115. RFC 9115 allows delegating entity to remain in full
-control of the delegation and be able to revoke the delegation any time and avoids
+control of the delegation and be able to revoke it any time and avoids
 the need to share private cryptographic key material between the involved entities.
 
 --- middle
 
 # Introduction
 
-Content delivery over HTTPS using two or more CDNs along the path requires
-credential management specifically when DNS-based delegation is used.  For
-example, an upstream CDN (uCDN) is delegating its credentials to a downstream (dCDN) for content delivery.
-This specifically applies when an entity delegates delivery of encrypted
-content to another trusted entity.
+Content delivery over HTTPS using two or more cooperating Content Delivery Networks (CDNs) along the path requires
+credential management, specifically when DNS-based redirection is used.  In such case an upstream CDN (uCDN) needs to delegate its credentials to a downstream (dCDN) for content delivery.
 
-{{RFC9115}} defines delegation methods where the upstream Content Delivery
-Network (uCDN), the holder of the domain, generates on- demand an X.509
-certificate for the downstream CDN (dCDN).  For further details, please refer
+{{RFC9115}} defines delegation methods that allow a uCDN on behalf of the content provider, the holder of the domain, to generate on-demand an X.509
+certificate that binds the designated domain name with a key-pair owned by the dCDN.  For further details, please refer
 to {{Section 1 of RFC9115}} and {{Section 5.1.2.1 of RFC9115}}.
 
-This document defines CDNI Metadata to make use of HTTPS delegation between an
+This document defines CDNI Metadata to make use of HTTPS delegation between a
 uCDN and a dCDN based on the mechanism specified in {{RFC9115}}.  Furthermore,
-it includes an addition of a delegation methods to the IANA registry.
+it adds a delegation method to the "CDNI Payload Types" IANA registry.
 
 {{terminology}} defines terminology used in this document.  {{fci-metadata}}
 presents delegation metadata for the FCI interface.  {{mi-metadata}} addresses
