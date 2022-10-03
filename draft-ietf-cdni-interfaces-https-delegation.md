@@ -133,6 +133,10 @@ object for a CDN supporting STAR delegation method.
 
 # ACME Delegation Metadata for CDNI {#mi-metadata}
 
+## Acme Star Delegation Method
+
+### Definition
+
 This section defines the AcmeStarDelegationMethod object which describes
 metadata related to the use of ACME/STAR API presented in {{RFC9115}}.
 
@@ -221,11 +225,23 @@ short-term certificate bound to the master certificate.
 
 * Property: acme-delegations
 
-* Description: an array of delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
+* Description: an array of Source objects pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
 
-* Type: Objects
+* Type: Array of Source objects
 
 * Mandatory-to-Specify: Yes
+
+
+* Property: auto-renewal
+
+* Description: Certificate validity period. Period after which a certificate renewal request must be sent.
+
+* Type: CertValidity object
+
+* Mandatory-to-Specify: Yes
+
+
+### Example
 
 Below shows both HostMatch and its Metadata related to a host, for example,
 here is a HostMatch object referencing "video.example.com" and a list of 2
@@ -241,10 +257,45 @@ ACMEStarDelegationMethod as follows:
     "acme-delegations": [
       "https://acme.ucdn.example/acme/delegation/ogfr8EcolOT",
       "https://acme.ucdn.example/acme/delegation/wSi5Lbb61E4"
-    ]
-  }
+    ],
+},
+{
+  "generic-metadata-type": "MI.CertValidity",
+  "generic-metadata-value": {
+     "TimeWindow": {
+          "start": "2019-01-10T00:00:00Z",
+          "end": "2019-01-20T00:00:00Z"
+     },
+     "Lifetime": 345600,          // 4 days   
+     "Lifetime-adjust": 259200    // 3 days 
+  }    
 }
 ~~~
+
+## Non-Star Delegation Method
+This section defines the NonStarDelegationMethod object which describes
+metadata related to the use of an ACME non-STAR delegation method that uses longer term certificates.
+
+This allows bootstrapping ACME non-STAR delegation method between a uCDN and a delegate
+dCDN.
+
+* Property: acme-delegations
+
+* Description: an array of Source objects pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
+
+* Type: Array of Source objects
+
+* Mandatory-to-Specify: Yes
+
+
+* Property: Duration
+
+* Description: Validity duration of a certificate (see Section 4.2.3.1 of {{RFC8006}} and Section 2.3.1 of {{RFC9115}} for the details).
+
+* Type: TimeWindow
+
+* Mandatory-to-Specify: No
+
 
 # IANA Considerations {#iana}
 
@@ -270,6 +321,51 @@ Interface:
 
 Encoding:
 : See {{mi-metadata}}
+
+
+## CDNI MI CertValidity Payload type
+
+A CertValidity object defines a timeframe and lifetime period for a given certificate.
+
+CertValidity must be defined as follows:
+
+* Property: TimeWindow
+
+* Description: Validity period.
+
+* Type: TimeWindow
+
+* Mandatory-to-Specify: Yes
+
+
+* Property: Lifetime
+
+* Description: Lifetime of the certificate.
+
+* Type: Time
+
+* Mandatory-to-Specify: Yes
+
+
+* Property: Lifetime-adjust
+
+* Description: Lifetime 
+
+* Type: Time
+
+* Mandatory-to-Specify: Yes
+
+
+Example:
+{
+ "TimeWindow": {
+       "start": "2019-01-10T00:00:00Z",
+       "end": "2019-01-20T00:00:00Z"
+  },
+  "Lifetime": 345600,          // 4 days   
+  "Lifetime-adjust": 259200    // 3 days 
+}
+
 
 # Security considerations {#sec}
 
