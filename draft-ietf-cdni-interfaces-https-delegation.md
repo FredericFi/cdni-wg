@@ -266,8 +266,8 @@ ACMEStarDelegationMethod as follows:
           "start": "2019-01-10T00:00:00Z",
           "end": "2019-01-20T00:00:00Z"
      },
-     "Lifetime": 345600,          // 4 days   
-     "Lifetime-adjust": 259200    // 3 days 
+     "Lifetime": 345600, // 4 days
+     "Lifetime-adjust": 259200 // 3 days
   }    
 }
 ~~~
