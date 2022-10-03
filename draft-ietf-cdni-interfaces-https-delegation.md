@@ -136,7 +136,7 @@ object for a CDN supporting ACME delegation method.
 This section defines the AcmeDelegationMethod object which describes
 metadata related to the use of ACME API presented in {{RFC9115}}.
 
-This section applies to ACME/STAR delegation, which allows short-term certificate delegation method and its automatic certificate renewal. It applies as well to non-STAR delegation method, which allows delegation between CDNs with longer term certificate.
+This section applies to both ACME/STAR delegation, which allows short-term certificate delegation method and its automatic certificate renewal, and as well to non-STAR delegation method which allows delegation between CDNs with longer term certificate.
 
 The following objects shall allow bootstrapping ACME delegation method, both for STAR and non-STAR approaches, between a uCDN and a delegate dCDN.
 
@@ -190,13 +190,13 @@ short-term certificate bound to the master certificate.
 
 ## AcmeDelegationMethod object
 
-The AcmeDelegationMethod object contains a source to ACME delegation method object, either STAR or non-STAR based, as defined in {{RFC9115}}, as well as certificate validity in order to indicate the renewal periodicity.
+The AcmeDelegationMethod object contains a source to ACME delegation method object, either STAR or non-STAR based, as defined in {{RFC9115}}, as well as the certificate validity in order to indicate the renewal periodicity.
 
 The following properties are defined:
 
 * Property: Acme-delegation
 
-* Description: a URL pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
+* Description: an URL pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
 
 * Type: Source object
 
@@ -212,7 +212,9 @@ The following properties are defined:
 * Mandatory-to-Specify: Yes
 
 
+
 In the case of a STAR-method, the following properties are mandatory to specify.
+
 
 
 * Property: STAR-method
@@ -224,6 +226,7 @@ In the case of a STAR-method, the following properties are mandatory to specify.
 * Mandatory-to-Specify: Yes for STAR delegation method
 
 
+
 * Property: Lifetime
 
 * Description: See {{Section 3.1.1 of RFC8739}}
@@ -231,6 +234,7 @@ In the case of a STAR-method, the following properties are mandatory to specify.
 * Type: Time
 
 * Mandatory-to-Specify: Yes for STAR delegation method
+
 
 
 * Property: Lifetime-adjust
@@ -324,5 +328,5 @@ proper/mandated encryption and authentication.  Please refer to Sections 7.1,
 # Acknowledgments
 {:unnumbered}
 
-The authors of this document wishes to thank all the authors of the {{RFC9115}} and more specifically, Thomas Fossati who has participated in the drafting, reviewing and discussion of this draft.
+The authors of this document wish to thank all the authors of the {{RFC9115}} and more specifically, Thomas Fossati who has participated in the drafting, reviewing and discussions of this draft.
 
