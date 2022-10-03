@@ -110,7 +110,7 @@ The FCI.Metadata object shall allow a dCDN to advertise the capabilities
 regarding the supported delegation methods and their configuration.
 
 The following is an example of the supported delegated methods capability
-object for a CDN supporting STAR delegation method.
+object for a CDN supporting ACME delegation method.
 
 ~~~json
 {
@@ -119,7 +119,7 @@ object for a CDN supporting STAR delegation method.
       "capability-type": "FCI.Metadata",
       "capability-value": {
         "metadata": [
-          "AcmeStarDelegationMethod",
+          "AcmeDelegationMethod",
           "... Other supported delegation methods ..."
         ]
       },
@@ -133,51 +133,16 @@ object for a CDN supporting STAR delegation method.
 
 # ACME Delegation Metadata for CDNI {#mi-metadata}
 
-## Acme Star Delegation Method
+This section defines the AcmeDelegationMethod object which describes
+metadata related to the use of ACME API presented in {{RFC9115}}. 
 
-### Definition
+This section applies to ACME/STAR delegation, which allows short-term certificate delegation method and its automatic certificate renewal. It applies as well to non-STAR delegation method, which allows delegation between CDNs with longer term certificate.
 
-This section defines the AcmeStarDelegationMethod object which describes
-metadata related to the use of ACME/STAR API presented in {{RFC9115}}.
-
-This allows bootstrapping ACME delegation method between a uCDN and a delegate
-dCDN.
+The following objects shall allow bootstrapping ACME delegation method, both for STAR and non-STAR approaches, between a uCDN and a delegate dCDN.
 
 As expressed in {{RFC9115}}, when an origin has set a delegation to a specific
 domain (i.e., dCDN), the dCDN should present to the end-user client a
 short-term certificate bound to the master certificate.
-
-~~~aasvg
-                                                    .------------.
-                            video.cp.example ?     | .-----.      |
-                 .---------------------------------->|     |      |
-                |                  (a)             | | DNS |  CP  |
-                |    .-------------------------------+     |      |
-                |   |   CNAME video.ucdn.example   | '-----'      |
-                |   |                               '------------'
-                |   |
-                |   |
-    .-----------|---v--.                            .------------.
-   |    .-----.-+-----. |   video.ucdn.example ?   | .-----.      |
-   |    |     |       +----------------------------->|     |      |
-   | UA | TLS |  DNS  | |          (b)             | | DNS | uCDN |
-   |    |     |       |<-----------------------------+     |      |
-   |    '--+--'-----+-' | CNAME video.dcdn.example | '-----'      |
-    '------|----^---|--'                            '------------'
-           |    |   |
-           |    |   |
-           |    |   |                               .------------.
-           |    |   |      video.dcdn.example ?    | .-----.      |
-           |    |    '------------------------------>|     |      |
-           |    |                  (c)             | | DNS |      |
-           |     '-----------------------------------+     |      |
-           |                   A 192.0.2.1         | +-----+ dCDN |
-           |                                       | |     |      |
-            '--------------------------------------->| TLS |      |
-                        SNI: video.cp.example      | |     |      |
-                                                   | '-----'      |
-                                                    '------------'
-~~~
 
 ~~~aasvg
 .----.                .----.               .----.                 .----.
@@ -223,78 +188,96 @@ short-term certificate bound to the master certificate.
 {: #fig-call-flow artwork-align="center"
    title="Example call-flow of STAR delegation in CDNI showing 2 levels of delegation"}
 
-* Property: acme-delegations
+## AcmeDelegationMethod object
 
-* Description: an array of Source objects pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
+The AcmeDelegationMethod object contains a source to ACME delegation method object, either STAR or non-STAR based, as defined in {{RFC9115}}, as well as certificate validity in order to indicate the renewal periodicity.
 
-* Type: Array of Source objects
+The following properties are defined:
 
-* Mandatory-to-Specify: Yes
+* Property: Acme-delegation
 
+* Description: a URL pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
 
-* Property: auto-renewal
-
-* Description: Certificate validity period. Period after which a certificate renewal request must be sent.
-
-* Type: CertValidity object
+* Type: Source object
 
 * Mandatory-to-Specify: Yes
 
 
-### Example
+* Property: TimeWindow
+
+* Description: Validity period of the certificate. ACcording to {{RFC8006}}, TimeWindow is defined by defining "start" time of the window, and "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In case of non-star method, the "start" and "end" properties of the window must be understood respectively as the "not-before" and "not-after" fields of the certificate.
+
+* Type: TimeWindow
+
+* Mandatory-to-Specify: Yes
+
+
+In the case of a STAR-method, the following properties are mandatory to specify.
+
+
+* Property: STAR-method
+
+* Description: boolean that specifies a STAR-method
+
+* Type: Boolean
+
+* Mandatory-to-Specify: Yes for STAR delegation method
+
+
+* Property: Lifetime
+
+* Description: See {{Section 3.1.1 of RFC8739}}
+
+* Type: Time
+
+* Mandatory-to-Specify: Yes for STAR delegation method
+
+
+* Property: Lifetime-adjust
+
+* Description: See {{Section 3.1.1 of RFC8739}}
+
+* Type: Time
+
+* Mandatory-to-Specify: Yes for STAR-delegation method
+
+
+
+## Example
 
 Below shows both HostMatch and its Metadata related to a host, for example,
 here is a HostMatch object referencing "video.example.com" and a list of 2
 acme-delegation objects.
 
 Following the example above, the metadata is modeled for
-ACMEStarDelegationMethod as follows:
+ACMEDelegationMethod as follows:
 
 ~~~json
 {
-  "generic-metadata-type": "MI.AcmeStarDelegationMethod",
-  "generic-metadata-value": {
-    "acme-delegations": [
-      "https://acme.ucdn.example/acme/delegation/ogfr8EcolOT",
-      "https://acme.ucdn.example/acme/delegation/wSi5Lbb61E4"
-    ],
-},
-{
-  "generic-metadata-type": "MI.CertValidity",
-  "generic-metadata-value": {
-     "TimeWindow": {
-          "start": "2019-01-10T00:00:00Z",
-          "end": "2019-01-20T00:00:00Z"
+  "generic-metadata-type": "MI.AcmeDelegationMethod",
+  "generic-metadata-value": [
+     {
+        "Acme-delegation": "https://acme.ucdn.example/acme/delegation/ogfr8EcolOT",
+        "TimeWindow": {
+             "start": "2019-01-10T00:00:00Z",
+             "end": "2019-01-20T00:00:00Z"
+        },     
+        "Lifetime": 345600, // 4 days
+        "Lifetime-adjust": 259200 // 3 days
+        "STAR-method": true
      },
-     "Lifetime": 345600, // 4 days
-     "Lifetime-adjust": 259200 // 3 days
-  }
+     }
+       "Acme-delegation": "https://acme.ucdn.example/acme/delegation/wSi5Lbb61E4",
+       "TimeWindow": {
+            "start": "2019-01-10T00:00:00Z",
+            "end": "2019-01-20T00:00:00Z"
+       }
+     }
+  ]
 }
+
 ~~~
 
-## Non-Star Delegation Method
-This section defines the NonStarDelegationMethod object which describes
-metadata related to the use of an ACME non-STAR delegation method that uses longer term certificates.
-
-This allows bootstrapping ACME non-STAR delegation method between a uCDN and a delegate
-dCDN.
-
-* Property: acme-delegations
-
-* Description: an array of Source objects pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see Section 2.3.1 of {{RFC9115}} for the details).
-
-* Type: Array of Source objects
-
-* Mandatory-to-Specify: Yes
-
-
-* Property: Duration
-
-* Description: Validity duration of a certificate (see Section 4.2.3.1 of {{RFC8006}} and Section 2.3.1 of {{RFC9115}} for the details).
-
-* Type: TimeWindow
-
-* Mandatory-to-Specify: No
 
 
 # IANA Considerations {#iana}
@@ -304,16 +287,16 @@ This document requests the registration of the following entries under the
 
 | Payload Type | Specification |
 |---
-| MI.AcmeStarDelegationMethod | {{&SELF}} |
+| MI.AcmeDelegationMethod | {{&SELF}} |
 
 [^to-be-removed]
 
 [^to-be-removed]: RFC Editor: please replace {{&SELF}} with the RFC number of this RFC and remove this note.
 
-## CDNI MI AcmeStarDelegationMethod Payload Type
+## CDNI MI AcmeDelegationMethod Payload Type
 
 Purpose:
-: The purpose of this Payload Type is to distinguish AcmeStarDelegationMethod
+: The purpose of this Payload Type is to distinguish AcmeDelegationMethod
   MI objects (and any associated capability advertisement)
 
 Interface:
@@ -321,50 +304,6 @@ Interface:
 
 Encoding:
 : See {{mi-metadata}}
-
-
-## CDNI MI CertValidity Payload type
-
-A CertValidity object defines a timeframe and lifetime period for a given certificate.
-
-CertValidity must be defined as follows:
-
-* Property: TimeWindow
-
-* Description: Validity period.
-
-* Type: TimeWindow
-
-* Mandatory-to-Specify: Yes
-
-
-* Property: Lifetime
-
-* Description: Lifetime of the certificate.
-
-* Type: Time
-
-* Mandatory-to-Specify: Yes
-
-
-* Property: Lifetime-adjust
-
-* Description: Lifetime
-
-* Type: Time
-
-* Mandatory-to-Specify: Yes
-
-
-Example:
-{
- "TimeWindow": {
-       "start": "2019-01-10T00:00:00Z",
-       "end": "2019-01-20T00:00:00Z"
-  },
-  "Lifetime": 345600,          // 4 days
-  "Lifetime-adjust": 259200    // 3 days
-}
 
 
 # Security considerations {#sec}
@@ -385,4 +324,5 @@ proper/mandated encryption and authentication.  Please refer to Sections 7.1,
 # Acknowledgments
 {:unnumbered}
 
-TODO
+The authors of this document wishes to thank all the authors of the {{RFC9115}} and more specifically, Thomas Fossati who has participated in the drafting, reviewing and discussion of this draft.
+
