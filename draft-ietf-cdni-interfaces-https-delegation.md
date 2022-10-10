@@ -308,5 +308,5 @@ proper/mandated encryption and authentication.  Please refer to Sections 7.1,
 # Acknowledgments
 {:unnumbered}
 
-The authors of this document wish to thank all the authors of the {{RFC9115}} and more specifically, Thomas Fossati who has participated in the drafting, reviewing and discussions of this draft.
+We would like to thank authors of the {{RFC9115}}, Antonio Augustin Pastor Perales, Diego Lopez, Thomas Fossati and Yaron Sheffer. Additionally, our gratitude to Thomas Fossati who participated in the drafting, reviewing and giving his feedback in finalizing this document. We also thank CDNI, co-chair Kevin Ma for his continual review and feedback during the development of this document.
 
