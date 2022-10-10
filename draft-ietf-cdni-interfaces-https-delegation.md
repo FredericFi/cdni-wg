@@ -1,8 +1,8 @@
 ---
 v: 3
 
-title: CDNI extensions for HTTPS delegation
-abbrev: CDNI extensions for HTTPS delegation
+title: CDNI metadata for ACME-based delegation
+abbrev: CDNI metadata for ACME-based delegation
 docname: draft-ietf-cdni-interfaces-https-delegation-latest
 
 category: std
@@ -142,7 +142,7 @@ RFC9115}}).
 To that end, this section defines the AcmeDelegationMethod object which
 describes metadata for using the ACME delegation interface {{RFC9115}}.
 
-The AcmeDelegationMethod applies to both ACME STAR delegation, which provides a
+The ACMEDelegationMethod applies to both ACME STAR delegation, which provides a
 delegation model based on short-term certificates with automatic renewal, and
 non-STAR delegation, which allows delegation between CDNs using normal
 certificates.
@@ -197,29 +197,28 @@ delegation message flows to obtain STAR certificate bound to the origin's name.
 {{acmedeleobj}} defines the objects used for bootstrapping the ACME delegation
 method between a uCDN and a delegate dCDN.
 
-## AcmeDelegationMethod Object {#acmedeleobj}
+## ACMEDelegationMethod Object {#acmedeleobj}
 
-The AcmeDelegationMethod object contains a source to ACME delegation method object, either STAR or non-STAR based, as defined in {{RFC9115}}, as well as the certificate validity in order to indicate the renewal periodicity.
+The ACMEDelegationMethod object contains an array of objects defined with several properties as defined below:
 
-The following properties are defined:
+* Name: ACME-delegation
 
-* Name: Acme-delegation
-
-  * Description: an URL pointing at delegation objects associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
+  * Description: a source (a URL) pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
   * Type: Source object
   * Mandatory-to-Specify: Yes
 
 * Property: TimeWindow
-  * Description: Validity period of the certificate. ACcording to {{RFC8006}}, TimeWindow is defined by defining "start" time of the window, and "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In case of non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
+  * Description: Validity period of the certificate. According to {{RFC8006}}, TimeWindow is defined by defining "start" time of the window, and "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In case of non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
-In the case the delegation is STAR-based, the following properties are mandatory to specify:
 
 * Property: STAR-method
-  * Description: boolean that specifies a STAR-method
+  * Description: boolean set to true if a STAR method is specified
   * Type: Boolean
   * Mandatory-to-Specify: Yes for STAR delegation method
+
+In the case that the delegation is STAR-based, the following properties are mandatory to specify:
 
 * Property: Lifetime
   * Description: See {{Section 3.1.1 of RFC8739}}
@@ -233,22 +232,17 @@ In the case the delegation is STAR-based, the following properties are mandatory
 
 ## Example
 
-The example below shows both HostMatch and its Metadata related to a host, for example,
-here is a HostMatch object referencing "video.example.com" and a list of two
-ACME delegation objects.
-
-Following the example above, the metadata is modeled for
-ACMEDelegationMethod as follows:
+Below shows an example of an ACMEDelegationMethod objects for 2 ACME delegations, one STAR-based, and another non-STAR based.
 
 ~~~json
 {
-  "generic-metadata-type": "MI.AcmeDelegationMethod",
+  "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": [
     {
-      "Acme-delegation": "https://acme.ucdn.example/delegation/ogfr",
+      "ACME-delegation": "https://acme.ucdn.example/delegation/ogfr",
       "TimeWindow": {
-        "start": "2019-01-10T00:00:00Z",
-        "end": "2019-01-20T00:00:00Z"
+        "start": "2022-10-10T00:00:00Z",
+        "end": "2022-10-13T00:00:00Z"
       },
       "Lifetime": 345600, // 4 days
       "Lifetime-adjust": 259200, // 3 days
@@ -258,7 +252,7 @@ ACMEDelegationMethod as follows:
       "Acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
       "TimeWindow": {
         "start": "2019-01-10T00:00:00Z",
-        "end": "2019-01-20T00:00:00Z"
+        "end": "2023-01-20T00:00:00Z"
       }
     }
   ]
@@ -272,13 +266,13 @@ This document requests the registration of the following entry under the
 
 | Payload Type | Specification |
 |---
-| MI.AcmeDelegationMethod | {{&SELF}} |
+| MI.ACMEDelegationMethod | {{&SELF}} |
 
 [^to-be-removed]
 
 [^to-be-removed]: RFC Editor: please replace {{&SELF}} with the RFC number of this RFC and remove this note.
 
-## CDNI MI AcmeDelegationMethod Payload Type
+## CDNI MI ACMEDelegationMethod Payload Type
 
 Purpose:
 : The purpose of this Payload Type is to distinguish AcmeDelegationMethod
