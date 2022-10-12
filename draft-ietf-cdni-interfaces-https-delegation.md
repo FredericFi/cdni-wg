@@ -120,7 +120,7 @@ object for a dCDN implementing the ACME delegation method.
       "capability-type": "FCI.Metadata",
       "capability-value": {
         "metadata": [
-          "AcmeDelegationMethod",
+          "ACMEDelegationMethod",
           "... Other supported delegation methods ..."
         ]
       },
@@ -199,12 +199,12 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object contains an array of objects defined with several properties as defined below:
+The ACMEDelegationMethod object is defined with several properties as defined below:
 
 * Name: ACME-delegation
 
   * Description: a source (a URL) pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
-  * Type: Source object
+  * Type: Source object, according to {{RFC8006}}
   * Mandatory-to-Specify: Yes
 
 * Property: TimeWindow
@@ -212,32 +212,26 @@ The ACMEDelegationMethod object contains an array of objects defined with severa
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
-
-* Property: STAR-method
-  * Description: boolean set to true if a STAR method is specified
-  * Type: Boolean
-  * Mandatory-to-Specify: Yes for STAR delegation method
-
 In the case that the delegation is STAR-based, the following properties are mandatory to specify:
 
 * Property: Lifetime
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time
-  * Mandatory-to-Specify: Yes for STAR delegation method
+  * Type: Time, according {{RFC8006}}
+  * Mandatory-to-Specify: Yes, if a STAR delegation method is specified
 
 * Property: Lifetime-adjust
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time
-  * Mandatory-to-Specify: Yes for STAR-delegation method
+  * Mandatory-to-Specify: Yes, if a STAR delegation method is specified
 
 ## Example
 
-Below shows an example of an ACMEDelegationMethod objects for 2 ACME delegations, one STAR-based, and another non-STAR based.
-
 ~~~json
+
+Below shows an example of a ACMEDelegationMethod object for a STAR-based ACME delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
-  "generic-metadata-value": [
+  "generic-metadata-value": 
     {
       "ACME-delegation": "https://acme.ucdn.example/delegation/ogfr",
       "TimeWindow": {
@@ -246,8 +240,13 @@ Below shows an example of an ACMEDelegationMethod objects for 2 ACME delegations
       },
       "Lifetime": 345600, // 4 days
       "Lifetime-adjust": 259200, // 3 days
-      "STAR-method": true
-    },
+    }
+ }
+
+Below shows an example of a ACMEDelegationMethod object for a non-STAR based.
+{
+  "generic-metadata-type": "MI.ACMEDelegationMethod",
+  "generic-metadata-value": 
     {
       "Acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
       "TimeWindow": {
@@ -255,8 +254,35 @@ Below shows an example of an ACMEDelegationMethod objects for 2 ACME delegations
         "end": "2023-01-20T00:00:00Z"
       }
     }
-  ]
 }
+
+Below is a complete example showing how a HostMatch and its Metadata related to a host, hold associated delegation metadata.
+
+HostMatch:
+ {
+   "host": "video.example.com",
+   "host-metadata": {
+     "type": "MI.HostMetadata",
+     "href": "https://metadata.ucdn.example/host1234"
+   }
+}
+
+HostMetadata:
+ {
+   "paths": "/video",
+   "metadata": [{
+        "generic-metadata-type": "MI.ACMEDelegationMethod",
+        "generic-metadata-value": 
+         {
+           "Acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
+           "TimeWindow": {
+             "start": "2019-01-10T00:00:00Z",
+             "end": "2023-01-20T00:00:00Z"
+         }
+     }]
+}
+  
+
 ~~~
 
 # IANA Considerations {#iana}
