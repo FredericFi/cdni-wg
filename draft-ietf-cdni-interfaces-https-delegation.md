@@ -224,65 +224,75 @@ In the case that the delegation is STAR-based, the following properties are mand
   * Type: Time
   * Mandatory-to-Specify: Yes, if a STAR delegation method is specified
 
-## Example
+## Examples {#examples}
+
+The following example shows an `ACMEDelegationMethod` object for a STAR-based
+ACME delegation.
 
 ~~~json
-
-Below shows an example of a ACMEDelegationMethod object for a STAR-based ACME delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
-  "generic-metadata-value": 
-    {
-      "ACME-delegation": "https://acme.ucdn.example/delegation/ogfr",
-      "TimeWindow": {
-        "start": "2022-10-10T00:00:00Z",
-        "end": "2022-10-13T00:00:00Z"
-      },
-      "Lifetime": 345600, // 4 days
-      "Lifetime-adjust": 259200, // 3 days
+  "generic-metadata-value": {
+    "ACME-delegation": "https://acme.ucdn.example/delegation/ogfr",
+    "TimeWindow": {
+      "start": "2022-10-10T00:00:00Z",
+      "end": "2022-10-13T00:00:00Z"
+    },
+    "Lifetime": 345600,
+    "Lifetime-adjust": 259200
+  }
+}
+~~~
+
+The example below shows an `ACMEDelegationMethod` object for a non-STAR ACME
+delegation.
+
+~~~json
+{
+  "generic-metadata-type": "MI.ACMEDelegationMethod",
+  "generic-metadata-value": {
+    "ACME-delegation": "https://acme.ucdn.example/delegation/wSi5",
+    "TimeWindow": {
+      "start": "2019-01-10T00:00:00Z",
+      "end": "2023-01-20T00:00:00Z"
     }
- }
+  }
+}
+~~~
 
-Below shows an example of a ACMEDelegationMethod object for a non-STAR based.
+The following is a complete example showing how a HostMatch and its Metadata
+related to a host hold associated delegation metadata.
+
+* HostMatch:
+
+~~~json
 {
-  "generic-metadata-type": "MI.ACMEDelegationMethod",
-  "generic-metadata-value": 
+  "host": "video.example.com",
+  "host-metadata": {
+    "type": "MI.HostMetadata",
+    "href": "https://metadata.ucdn.example/host1234"
+  }
+}
+~~~
+
+* HostMetadata:
+
+~~~json
+{
+  "paths": "/video",
+  "metadata": [
     {
-      "Acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
-      "TimeWindow": {
-        "start": "2019-01-10T00:00:00Z",
-        "end": "2023-01-20T00:00:00Z"
+      "generic-metadata-type": "MI.ACMEDelegationMethod",
+      "generic-metadata-value": {
+        "ACME-delegation": "https://acme.ucdn.example/delegation/wSi5",
+        "TimeWindow": {
+          "start": "2019-01-10T00:00:00Z",
+          "end": "2023-01-20T00:00:00Z"
+        }
       }
     }
+  ]
 }
-
-Below is a complete example showing how a HostMatch and its Metadata related to a host, hold associated delegation metadata.
-
-HostMatch:
- {
-   "host": "video.example.com",
-   "host-metadata": {
-     "type": "MI.HostMetadata",
-     "href": "https://metadata.ucdn.example/host1234"
-   }
-}
-
-HostMetadata:
- {
-   "paths": "/video",
-   "metadata": [{
-        "generic-metadata-type": "MI.ACMEDelegationMethod",
-        "generic-metadata-value": 
-         {
-           "Acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
-           "TimeWindow": {
-             "start": "2019-01-10T00:00:00Z",
-             "end": "2023-01-20T00:00:00Z"
-         }
-     }]
-}
-  
-
 ~~~
 
 # IANA Considerations {#iana}
