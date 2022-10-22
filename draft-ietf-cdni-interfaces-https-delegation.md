@@ -143,9 +143,9 @@ To that end, this section defines the AcmeDelegationMethod object which
 describes metadata for using the ACME delegation interface {{RFC9115}}.
 
 The ACMEDelegationMethod applies to both ACME STAR delegation, which provides a
-delegation model based on short-term certificates with automatic renewal, and
-non-STAR delegation, which allows delegation between CDNs using normal
-certificates.
+delegation model based on short-term certificates with automatic renewal {{Section 2.3.2 of RFC9115}}, and
+non-STAR delegation, which allows delegation between CDNs using long-term
+certificates {{Section 2.3.3 of RFC9115}}.
 
 {{fig-call-flow}} provides a high-level view of the combined CDNI and ACME
 delegation message flows to obtain STAR certificate bound to the origin's name.
@@ -199,15 +199,16 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object is defined with several properties as defined below:
+The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation objects depending on the delegation certificate validity. The ACMEDelegationMethod object is defined with several properties as shown below. 
 
-* Name: ACME-delegation
+* Property: ACME-delegation
 
-  * Description: a source (a URL) pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
+  * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
   * Type: Source object, according to {{RFC8006}}
   * Mandatory-to-Specify: Yes
 
 * Property: TimeWindow
+
   * Description: Validity period of the certificate. According to {{RFC8006}}, TimeWindow is defined by defining "start" time of the window, and "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In case of non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
@@ -215,14 +216,16 @@ The ACMEDelegationMethod object is defined with several properties as defined be
 In the case that the delegation is STAR-based, the following properties are mandatory to specify:
 
 * Property: Lifetime
+
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time, according {{RFC8006}}
-  * Mandatory-to-Specify: Yes, if a STAR delegation method is specified
+  * Type: Time, see {{RFC8006}}
+  * Mandatory-to-Specify: Yes [only if a STAR delegation method is specified]
 
 * Property: Lifetime-adjust
-  * Description: See {{Section 3.1.1 of RFC8739}}
+
+  * Description: See {{RFC 3.1.1 of RFC8739}}
   * Type: Time
-  * Mandatory-to-Specify: Yes, if a STAR delegation method is specified
+  * Mandatory-to-Specify: Yes [only if a STAR delegation method is specified]
 
 ## Examples {#examples}
 
@@ -260,7 +263,7 @@ delegation.
 }
 ~~~
 
-The following is a complete example showing how a HostMatch and its Metadata
+The following is a complete example showing how a HostMatch {{RFC8006}} and its Metadata
 related to a host hold associated delegation metadata.
 
 * HostMatch:
@@ -280,7 +283,7 @@ related to a host hold associated delegation metadata.
 ~~~json
 {
   "paths": "/video",
-  "metadata": [
+  "metadata": [ // defining here a STAR delegation
     {
       "generic-metadata-type": "MI.ACMEDelegationMethod",
       "generic-metadata-value": {
