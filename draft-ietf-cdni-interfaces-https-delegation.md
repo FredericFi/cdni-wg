@@ -221,13 +221,13 @@ In the case that the delegation is STAR-based, the following properties are mand
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time, see {{RFC8006}}
-  * Mandatory-to-Specify: Yes [only if a STAR delegation method is specified]
+  * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
 * Property: Lifetime-adjust
 
-  * Description: See {{RFC 3.1.1 of RFC8739}}
+  * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time
-  * Mandatory-to-Specify: Yes [only if a STAR delegation method is specified]
+  * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
 ## Examples {#examples}
 
