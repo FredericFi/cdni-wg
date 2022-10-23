@@ -12,8 +12,8 @@ consensus: true
 submissiontype: IETF
 
 ipr: trust200902
-area: ART
-workgroup: CDNI Working Group
+area: "Applications and Real-Time"
+workgroup: "Content Delivery Networks Interconnection"
 keyword: [HTTPS, delegation, ACME, STAR]
 
 stand_alone: yes
@@ -46,9 +46,9 @@ author:
    email: sanjay.mishra@verizon.com
 
 venue:
-  group: Content Delivery Networks Interconnection
-  mail: cdni@ietf.org
-  github: TODO
+  group: "Content Delivery Networks Interconnection"
+  mail: "cdni@ietf.org"
+  github: "FredericFi/cdni-wg"
 
 normative:
   RFC8006:
