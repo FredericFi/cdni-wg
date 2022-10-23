@@ -201,7 +201,8 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation objects depending on the delegation certificate validity. The ACMEDelegationMethod object is defined with several properties as shown below.
+The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation objects depending on the delegation certificate validity.
+The ACMEDelegationMethod object is defined with several properties as shown below.
 
 * Property: ACME-delegation
 
