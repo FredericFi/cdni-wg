@@ -3,8 +3,6 @@ v: 3
 
 title: CDNI extensions for HTTPS delegation
 abbrev: CDNI extensions for HTTPS delegation
-[comment]: # title: CDNI metadata for ACME-based delegation
-[comment]: # abbrev: CDNI metadata for ACME-based delegation
 docname: draft-ietf-cdni-interfaces-https-delegation-latest
 
 category: std
