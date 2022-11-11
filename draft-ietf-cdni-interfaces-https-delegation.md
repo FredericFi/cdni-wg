@@ -68,7 +68,7 @@ This document defines metadata objects to support delegating the delivery of
 HTTPS content between two or more interconnected CDNs.  Specifically, this
 document defines CDNI Metadata interface objects to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
-RFC9115. RFC 9115 allows delegating entity to remain in full
+RFC9115. RFC 9115 allows delegating entities to remain in full
 control of the delegation and be able to revoke it any time and avoids
 the need to share private cryptographic key material between the involved entities.
 
@@ -77,7 +77,7 @@ the need to share private cryptographic key material between the involved entiti
 # Introduction
 
 Content delivery over HTTPS using two or more cooperating Content Delivery Networks (CDNs) along the path requires
-credential management, specifically when DNS-based redirection is used.  In such case an upstream CDN (uCDN) needs to delegate its credentials to a downstream (dCDN) for content delivery.
+credential management, specifically when DNS-based redirection is used.  In such cases, an upstream CDN (uCDN) needs to delegate its credentials to a downstream (dCDN) for content delivery.
 
 {{RFC9115}} defines delegation methods that allow a uCDN on behalf of the content provider, the holder of the domain, to generate on-demand an X.509
 certificate that binds the designated domain name with a key-pair owned by the dCDN.  For further details, please refer
@@ -134,7 +134,7 @@ object for a dCDN implementing the ACME delegation method.
 
 # ACME Delegation Metadata for CDNI {#mi-metadata}
 
-When a uCDN delegates a dCDN to deliver HTTPS traffic using DNS Redirection
+When a uCDN delegates to a dCDN to deliver HTTPS traffic using DNS Redirection
 {{RFC7975}}, the dCDN must use a certificate bound to the origin's name to
 successfully authenticate to the end-user (see also {{Section 5.1.2.1 of
 RFC9115}}).
@@ -199,36 +199,34 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation objects depending on the delegation certificate validity.
-The ACMEDelegationMethod object is defined with several properties as shown below.
+The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation depending on the delegation certificate validity.
+The ACMEDelegationMethod object is defined with several properties shown below.
 
-* Property: ACME-delegation
+* Property: ACMEDelegation
 
   * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
-  * Type: Source object, according to {{RFC8006}}
+  * Type: Link object, according to {{Section 4.3.1 of RFC8006}}
   * Mandatory-to-Specify: Yes
 
-* Property: TimeWindow
+* Property: time-window
 
-  * Description: Validity period of the certificate. According to {{RFC8006}}, TimeWindow is defined by defining "start" time of the window, and "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In case of non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
+  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity in Epoch time format. In the case of the non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
-
-In the case that the delegation is STAR-based, the following properties are mandatory to specify:
 
 * Property: Lifetime
 
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time, see {{RFC8006}}
+  * Type: Time, see {{Section 4.3.4 of RFC8006}}
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
 * Property: Lifetime-adjust
 
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time
+  * Type: Time 
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
-## Examples {#examples}
+### Examples
 
 The following example shows an `ACMEDelegationMethod` object for a STAR-based
 ACME delegation.
@@ -237,13 +235,13 @@ ACME delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACME-delegation": "https://acme.ucdn.example/delegation/ogfr",
-    "TimeWindow": {
-      "start": "2022-10-10T00:00:00Z",
-      "end": "2022-10-13T00:00:00Z"
+    "ACMEDelegation": "https://acme.ucdn.example/delegation/ogfr",
+    "time-window": {
+      "start": 1665417434, // 10-10-2022
+      "end": 1665676634    // 10-13-2022
     },
-    "Lifetime": 345600,
-    "Lifetime-adjust": 259200
+    "Lifetime": 345600, 
+    "Lifetime-adjust": 259200 
   }
 }
 ~~~
@@ -255,10 +253,12 @@ delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACME-delegation": "https://acme.ucdn.example/delegation/wSi5",
-    "TimeWindow": {
-      "start": "2019-01-10T00:00:00Z",
-      "end": "2023-01-20T00:00:00Z"
+    "ACMEDelegation": { 
+     href: "https://acme.ucdn.example/delegation/wSi5" 
+    },
+    "time-Window": {
+      "start": 1570982234, // 10-13-2019
+      "end": 1665417434    // 10-13-2023
     }
   }
 }
@@ -288,8 +288,8 @@ related to a host hold associated delegation metadata.
     {
       "generic-metadata-type": "MI.ACMEDelegationMethod",
       "generic-metadata-value": {
-        "ACME-delegation": "https://acme.ucdn.example/delegation/wSi5",
-        "TimeWindow": {
+        "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5",
+        "time-window": {
           "start": "2019-01-10T00:00:00Z",
           "end": "2023-01-20T00:00:00Z"
         }
@@ -319,7 +319,7 @@ Purpose:
   MI objects (and any associated capability advertisement)
 
 Interface:
-: MI
+: MI/FCI
 
 Encoding:
 : See {{mi-metadata}}
@@ -333,14 +333,14 @@ Management Environment (ACME) Profile for Generating Delegated Certificates
 {{RFC8008}}.
 
 The delegation objects properties such as the list of delegation objects
-mentioned in {{mi-metadata}}are critical.  They should be protected by the
+mentioned in {{mi-metadata}} are critical.  They should be protected by the
 proper/mandated encryption and authentication.  Please refer to Sections 7.1,
-7.2 and 7.4 of {{RFC9115}}.
+7.2 and 7.4 of {{RFC9115}}. Those objects metadata should be protected according to {{Section 8.3 of RFC8006}}. 
 
 --- back
 
 # Acknowledgments
 {:unnumbered}
 
-We would like to thank authors of the {{RFC9115}}, Antonio Augustin Pastor Perales, Diego Lopez, Thomas Fossati and Yaron Sheffer. Additionally, our gratitude to Thomas Fossati who participated in the drafting, reviewing and giving his feedback in finalizing this document. We also thank CDNI, co-chair Kevin Ma for his continual review and feedback during the development of this document.
+We would like to thank authors of the {{RFC9115}}, Antonio Augustin Pastor Perales, Diego Lopez, Thomas Fossati and Yaron Sheffer. Additionally, our gratitude to Thomas Fossati who participated in the drafting, reviewing and giving his feedback in finalizing this document. We also thank CDNI co-chair Kevin Ma for his continual review and feedback during the development of this document.
 
