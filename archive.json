@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-10-23T00:56:28.204450+00:00",
+  "timestamp": "2022-11-22T00:43:10.566652+00:00",
   "repo": "FredericFi/cdni-wg",
   "labels": [
     {
@@ -213,7 +213,7 @@
       "labels": [],
       "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
       "createdAt": "2022-09-11T22:44:59Z",
-      "updatedAt": "2022-09-12T15:55:14Z",
+      "updatedAt": "2022-11-21T09:53:55Z",
       "baseRepository": "FredericFi/cdni-wg",
       "baseRefName": "main",
       "baseRefOid": "ae3c8dc93c9992dce8bd442823ef7fbc90764a2d",
@@ -397,7 +397,7 @@
       "labels": [],
       "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
       "createdAt": "2022-10-04T10:30:43Z",
-      "updatedAt": "2022-10-10T14:07:16Z",
+      "updatedAt": "2022-11-21T09:53:50Z",
       "baseRepository": "FredericFi/cdni-wg",
       "baseRefName": "main",
       "baseRefOid": "9308126632219f928c75d373625fe3751deaa359",
@@ -453,7 +453,7 @@
       "labels": [],
       "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
       "createdAt": "2022-10-19T14:05:13Z",
-      "updatedAt": "2022-10-22T06:08:00Z",
+      "updatedAt": "2022-11-21T09:53:48Z",
       "baseRepository": "FredericFi/cdni-wg",
       "baseRefName": "main",
       "baseRefOid": "20ddde2a77caa8111de4bda5225e159295cc113f",
@@ -466,6 +466,32 @@
       "mergeCommit": {
         "oid": "dadbce5f0d0b4c1d5a4b9294f1d98d7b385ce810"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOHulKFM5DWCcD",
+      "title": "fix JSON syntax in examples",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/16",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Note: inserting C-style comments in the JSON examples will fail validation.\r\nIf we need to add contextual explanations about an example, that should be done in the surrounding prose.\r\n\r\nSigned-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-11-21T10:44:19Z",
+      "updatedAt": "2022-11-21T10:44:20Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "11aa37eb74855d0ea401fea0757470e3e248e9b0",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "json-fixes",
+      "headRefOid": "ebd8369668cace316d853baad35425b3d3157905",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
