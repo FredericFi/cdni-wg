@@ -223,7 +223,7 @@ The ACMEDelegationMethod object is defined with several properties shown below.
 * Property: Lifetime-adjust
 
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time 
+  * Type: Time
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
 ### Examples
@@ -237,11 +237,11 @@ ACME delegation.
   "generic-metadata-value": {
     "ACMEDelegation": "https://acme.ucdn.example/delegation/ogfr",
     "time-window": {
-      "start": 1665417434, // 10-10-2022
-      "end": 1665676634    // 10-13-2022
+      "start": 1665417434,
+      "end": 1665676634
     },
-    "Lifetime": 345600, 
-    "Lifetime-adjust": 259200 
+    "Lifetime": 345600,
+    "Lifetime-adjust": 259200
   }
 }
 ~~~
@@ -253,13 +253,11 @@ delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACMEDelegation": { 
-     href: "https://acme.ucdn.example/delegation/wSi5" 
-    },
-    "time-Window": {
-      "start": 1570982234, // 10-13-2019
-      "end": 1665417434    // 10-13-2023
-    }
+    "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5"
+  },
+  "time-window": {
+    "start": 1570982234,
+    "end": 1665417434
   }
 }
 ~~~
@@ -284,7 +282,7 @@ related to a host hold associated delegation metadata.
 ~~~json
 {
   "paths": "/video",
-  "metadata": [ // defining here a STAR delegation
+  "metadata": [
     {
       "generic-metadata-type": "MI.ACMEDelegationMethod",
       "generic-metadata-value": {
@@ -335,7 +333,7 @@ Management Environment (ACME) Profile for Generating Delegated Certificates
 The delegation objects properties such as the list of delegation objects
 mentioned in {{mi-metadata}} are critical.  They should be protected by the
 proper/mandated encryption and authentication.  Please refer to Sections 7.1,
-7.2 and 7.4 of {{RFC9115}}. Those objects metadata should be protected according to {{Section 8.3 of RFC8006}}. 
+7.2 and 7.4 of {{RFC9115}}. Those objects metadata should be protected according to {{Section 8.3 of RFC8006}}.
 
 --- back
 
