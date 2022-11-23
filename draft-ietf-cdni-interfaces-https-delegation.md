@@ -247,7 +247,7 @@ ACME delegation.
 ~~~
 
 The example below shows an `ACMEDelegationMethod` object for a non-STAR ACME
-delegation.
+delegation. Delegation object is defined as per {{section 4.3. of RFC8006}}.
 
 ~~~json
 {
@@ -259,41 +259,6 @@ delegation.
     "start": 1570982234,
     "end": 1665417434
   }
-}
-~~~
-
-The following is a complete example showing how a HostMatch {{RFC8006}} and its Metadata
-related to a host hold associated delegation metadata.
-
-* HostMatch:
-
-~~~json
-{
-  "host": "video.example.com",
-  "host-metadata": {
-    "type": "MI.HostMetadata",
-    "href": "https://metadata.ucdn.example/host1234"
-  }
-}
-~~~
-
-* HostMetadata:
-
-~~~json
-{
-  "paths": "/video",
-  "metadata": [
-    {
-      "generic-metadata-type": "MI.ACMEDelegationMethod",
-      "generic-metadata-value": {
-        "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5",
-        "time-window": {
-          "start": "2019-01-10T00:00:00Z",
-          "end": "2023-01-20T00:00:00Z"
-        }
-      }
-    }
-  ]
 }
 ~~~
 
@@ -324,16 +289,11 @@ Encoding:
 
 # Security considerations {#sec}
 
-Delegation metadata proposed here do not alter nor change Security
-Considerations as outlined in the following RFCs: An Automatic Certificate
+The delegation objects defined in this document do not add any vulnerabilities to the security
+considerations already specified in the following RFCs: An Automatic Certificate
 Management Environment (ACME) Profile for Generating Delegated Certificates
-{{RFC9115}}; the CDNI Metadata {{RFC8006}} and CDNI Footprint and Capabilities
+{{Section 7.2 and 7.4 of RFC9115}}; the CDNI Metadata {{Section 8.3 of RFC8006}} and CDNI Footprint and Capabilities
 {{RFC8008}}.
-
-The delegation objects properties such as the list of delegation objects
-mentioned in {{mi-metadata}} are critical.  They should be protected by the
-proper/mandated encryption and authentication.  Please refer to Sections 7.1,
-7.2 and 7.4 of {{RFC9115}}. Those objects metadata should be protected according to {{Section 8.3 of RFC8006}}.
 
 --- back
 
