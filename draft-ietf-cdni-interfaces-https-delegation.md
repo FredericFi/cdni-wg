@@ -53,6 +53,7 @@ normative:
   RFC8008:
   RFC8739:
   RFC9115:
+  RFC7525:
 
 informative:
   RFC7336:
@@ -247,7 +248,7 @@ ACME delegation.
 ~~~
 
 The example below shows an `ACMEDelegationMethod` object for a non-STAR ACME
-delegation. Delegation object is defined as per {{section 4.3. of RFC8006}}.
+delegation. The delegation object is defined as per {{Section 4.3 of RFC8006}}.
 
 ~~~json
 {
@@ -289,11 +290,22 @@ Encoding:
 
 # Security considerations {#sec}
 
-The delegation objects defined in this document do not add any vulnerabilities to the security
-considerations already specified in the following RFCs: An Automatic Certificate
-Management Environment (ACME) Profile for Generating Delegated Certificates
-{{Section 7.2 and 7.4 of RFC9115}}; the CDNI Metadata {{Section 8.3 of RFC8006}} and CDNI Footprint and Capabilities
-{{RFC8008}}.
+The metadata object defined in this document does not introduce any new
+security or privacy concerns over those already discussed in {{RFC9115}},
+{{RFC8006}} and {{RFC8008}}.
+
+The reader is expected to understand the ACME delegation trust model ({{Section
+7.1 of RFC9115}}) and security goal ({{Section 7.3 of RFC9115}}), in particular
+the criticality around the protection of the user account associated with the
+delegation.
+
+In addition, the requirements defined by CDNI Metadata and CDNI Footprint and
+Capabilities regarding the integrity, (mutual) authentication and
+confidentiality of the communication channel used to transport the metadata
+object apply.
+
+When TLS is used to achieve the above security objectives, the general TLS
+usage guidance in {{RFC7525}} MUST be followed.
 
 --- back
 
