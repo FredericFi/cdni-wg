@@ -203,7 +203,7 @@ method between a uCDN and a delegate dCDN.
 The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation depending on the delegation certificate validity.
 The ACMEDelegationMethod object is defined with several properties shown below.
 
-* Property: ACMEDelegation
+* Property: acme-delegation
 
   * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
   * Type: Link object, according to {{Section 4.3.1 of RFC8006}}
@@ -215,13 +215,13 @@ The ACMEDelegationMethod object is defined with several properties shown below.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
-* Property: Lifetime
+* Property: lifetime
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time, see {{Section 4.3.4 of RFC8006}}
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
-* Property: Lifetime-adjust
+* Property: lifetime-adjust
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time
@@ -236,13 +236,13 @@ ACME delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACMEDelegation": "https://acme.ucdn.example/delegation/ogfr",
+    "acme-delegation": "https://acme.ucdn.example/delegation/ogfr",
     "time-window": {
       "start": 1665417434,
       "end": 1665676634
     },
-    "Lifetime": 345600,
-    "Lifetime-adjust": 259200
+    "lifetime": 345600,
+    "lifetime-adjust": 259200
   }
 }
 ~~~
@@ -254,7 +254,7 @@ delegation. The delegation object is defined as per {{Section 4.3 of RFC8006}}.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5"
+    "acme-delegation": "https://acme.ucdn.example/delegation/wSi5"
   },
   "time-window": {
     "start": 1570982234,
