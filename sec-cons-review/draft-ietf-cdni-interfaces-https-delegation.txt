@@ -5,9 +5,9 @@
 Content Delivery Networks Interconnection                  F. Fieau, Ed.
 Internet-Draft                                                E. Stephan
 Intended status: Standards Track                                  Orange
-Expires: 27 May 2023                                           S. Mishra
+Expires: 3 June 2023                                           S. Mishra
                                                                  Verizon
-                                                        23 November 2022
+                                                        30 November 2022
 
 
                   CDNI extensions for HTTPS delegation
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 May 2023.
+   This Internet-Draft will expire on 3 June 2023.
 
 Copyright Notice
 
@@ -346,17 +346,11 @@ Table of Contents
    to transport the metadata object apply.
 
    When TLS is used to achieve the above security objectives, the
-   general TLS usage guidance in [RFC7525] MUST be followed.
+   general TLS usage guidance in [RFC9325] MUST be followed.
 
 6.  References
 
 6.1.  Normative References
-
-   [RFC7525]  Sheffer, Y., Holz, R., and P. Saint-Andre,
-              "Recommendations for Secure Use of Transport Layer
-              Security (TLS) and Datagram Transport Layer Security
-              (DTLS)", BCP 195, RFC 7525, DOI 10.17487/RFC7525, May
-              2015, <https://www.rfc-editor.org/rfc/rfc7525>.
 
    [RFC8006]  Niven-Jenkins, B., Murray, R., Caulfield, M., and K. Ma,
               "Content Delivery Network Interconnection (CDNI)
@@ -381,6 +375,12 @@ Table of Contents
               (ACME) Profile for Generating Delegated Certificates",
               RFC 9115, DOI 10.17487/RFC9115, September 2021,
               <https://www.rfc-editor.org/rfc/rfc9115>.
+
+   [RFC9325]  Sheffer, Y., Saint-Andre, P., and T. Fossati,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
+              2022, <https://www.rfc-editor.org/rfc/rfc9325>.
 
 6.2.  Informative References
 
