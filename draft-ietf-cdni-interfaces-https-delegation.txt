@@ -5,9 +5,9 @@
 Content Delivery Networks Interconnection                  F. Fieau, Ed.
 Internet-Draft                                                E. Stephan
 Intended status: Standards Track                                  Orange
-Expires: 27 May 2023                                           S. Mishra
+Expires: 4 June 2023                                           S. Mishra
                                                                  Verizon
-                                                        23 November 2022
+                                                         1 December 2022
 
 
                   CDNI extensions for HTTPS delegation
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 May 2023.
+   This Internet-Draft will expire on 4 June 2023.
 
 Copyright Notice
 
@@ -224,7 +224,7 @@ Table of Contents
    The ACMEDelegationMethod object is defined with several properties
    shown below.
 
-   *  Property: ACMEDelegation
+   *  Property: acme-delegation
 
       -  Description: a URL pointing at an ACME delegation object,
          either STAR or non-STAR, associated with the dCDN account on
@@ -251,7 +251,7 @@ Table of Contents
 
       -  Mandatory-to-Specify: Yes
 
-   *  Property: Lifetime
+   *  Property: lifetime
 
       -  Description: See Section 3.1.1 of [RFC8739]
 
@@ -260,7 +260,7 @@ Table of Contents
       -  Mandatory-to-Specify: Yes, only if a STAR delegation method is
          specified
 
-   *  Property: Lifetime-adjust
+   *  Property: lifetime-adjust
 
       -  Description: See Section 3.1.1 of [RFC8739]
 
@@ -277,60 +277,29 @@ Table of Contents
    {
      "generic-metadata-type": "MI.ACMEDelegationMethod",
      "generic-metadata-value": {
-       "ACMEDelegation": "https://acme.ucdn.example/delegation/ogfr",
+       "acme-delegation": "https://acme.ucdn.example/delegation/ogfr",
        "time-window": {
          "start": 1665417434,
          "end": 1665676634
        },
-       "Lifetime": 345600,
-       "Lifetime-adjust": 259200
+       "lifetime": 345600,
+       "lifetime-adjust": 259200
      }
    }
 
    The example below shows an ACMEDelegationMethod object for a non-STAR
-   ACME delegation.
+   ACME delegation.  The delegation object is defined as per Section 4.3
+   of [RFC8006].
 
    {
      "generic-metadata-type": "MI.ACMEDelegationMethod",
      "generic-metadata-value": {
-       "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5"
+       "acme-delegation": "https://acme.ucdn.example/delegation/wSi5"
      },
      "time-window": {
        "start": 1570982234,
        "end": 1665417434
      }
-   }
-
-   The following is a complete example showing how a HostMatch [RFC8006]
-   and its Metadata related to a host hold associated delegation
-   metadata.
-
-   *  HostMatch:
-
-   {
-     "host": "video.example.com",
-     "host-metadata": {
-       "type": "MI.HostMetadata",
-       "href": "https://metadata.ucdn.example/host1234"
-     }
-   }
-
-   *  HostMetadata:
-
-   {
-     "paths": "/video",
-     "metadata": [
-       {
-         "generic-metadata-type": "MI.ACMEDelegationMethod",
-         "generic-metadata-value": {
-           "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5",
-           "time-window": {
-             "start": "2019-01-10T00:00:00Z",
-             "end": "2023-01-20T00:00:00Z"
-           }
-         }
-       }
-     ]
    }
 
 4.   IANA Considerations
@@ -362,22 +331,32 @@ Table of Contents
 
 5.  Security considerations
 
-   Delegation metadata proposed here do not alter nor change Security
-   Considerations as outlined in the following RFCs: An Automatic
-   Certificate Management Environment (ACME) Profile for Generating
-   Delegated Certificates [RFC9115]; the CDNI Metadata [RFC8006] and
-   CDNI Footprint and Capabilities [RFC8008].
+   The metadata object defined in this document does not introduce any
+   new security or privacy concerns over those already discussed in
+   [RFC9115], [RFC8006] and [RFC8008].
 
-   The delegation objects properties such as the list of delegation
-   objects mentioned in Section 3 are critical.  They should be
-   protected by the proper/mandated encryption and authentication.
-   Please refer to Sections 7.1, 7.2 and 7.4 of [RFC9115].  Those
-   objects metadata should be protected according to Section 8.3 of
-   [RFC8006].
+   The reader is expected to understand the ACME delegation trust model
+   (Section 7.1 of [RFC9115]) and security goal (Section 7.3 of
+   [RFC9115]), in particular the criticality around the protection of
+   the user account associated with the delegation.
+
+   In addition, the requirements defined by CDNI Metadata and CDNI
+   Footprint and Capabilities regarding the integrity, (mutual)
+   authentication and confidentiality of the communication channel used
+   to transport the metadata object apply.
+
+   When TLS is used to achieve the above security objectives, the
+   general TLS usage guidance in [RFC7525] MUST be followed.
 
 6.  References
 
 6.1.  Normative References
+
+   [RFC7525]  Sheffer, Y., Holz, R., and P. Saint-Andre,
+              "Recommendations for Secure Use of Transport Layer
+              Security (TLS) and Datagram Transport Layer Security
+              (DTLS)", RFC 7525, DOI 10.17487/RFC7525, May 2015,
+              <https://www.rfc-editor.org/rfc/rfc7525>.
 
    [RFC8006]  Niven-Jenkins, B., Murray, R., Caulfield, M., and K. Ma,
               "Content Delivery Network Interconnection (CDNI)
