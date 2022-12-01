@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-11-24T00:42:20.044362+00:00",
+  "timestamp": "2022-12-01T00:43:13.886990+00:00",
   "repo": "FredericFi/cdni-wg",
   "labels": [
     {
@@ -509,19 +509,60 @@
       "labels": [],
       "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
       "createdAt": "2022-11-23T20:37:05Z",
-      "updatedAt": "2022-11-23T20:37:06Z",
+      "updatedAt": "2022-11-30T14:58:46Z",
       "baseRepository": "FredericFi/cdni-wg",
       "baseRefName": "main",
       "baseRefOid": "34f18a4a9a7ccf41940f7470981a158c77187254",
       "headRepository": "FredericFi/cdni-wg",
       "headRefName": "sec-cons-review",
-      "headRefOid": "d2f4c778f92bab29edd83ff0f41ea65115878176",
+      "headRefOid": "70f747c8014604d6bb6c87cd3ccdf01345dbca08",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHulKFM5Hfq-4",
+          "commit": {
+            "abbreviatedOid": "d2f4c77"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-30T14:58:01Z",
+          "updatedAt": "2022-11-30T14:58:01Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\nusage guidance in {{RFC9325}} MUST be followed.\r\n```",
+              "createdAt": "2022-11-30T14:58:01Z",
+              "updatedAt": "2022-11-30T14:58:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHulKFM5HfrIg",
+          "commit": {
+            "abbreviatedOid": "d2f4c77"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-30T14:58:19Z",
+          "updatedAt": "2022-11-30T14:58:20Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n  RFC9325:\r\n```",
+              "createdAt": "2022-11-30T14:58:19Z",
+              "updatedAt": "2022-11-30T14:58:20Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 18,
