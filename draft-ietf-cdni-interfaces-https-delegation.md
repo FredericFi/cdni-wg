@@ -53,7 +53,7 @@ normative:
   RFC8008:
   RFC8739:
   RFC9115:
-  RFC7525:
+  RFC9325:
 
 informative:
   RFC7336:
@@ -305,7 +305,7 @@ confidentiality of the communication channel used to transport the metadata
 object apply.
 
 When TLS is used to achieve the above security objectives, the general TLS
-usage guidance in {{RFC7525}} MUST be followed.
+usage guidance in {{RFC9325}} MUST be followed.
 
 --- back
 
