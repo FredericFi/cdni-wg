@@ -53,6 +53,7 @@ normative:
   RFC8008:
   RFC8739:
   RFC9115:
+  RFC7525:
 
 informative:
   RFC7336:
@@ -202,7 +203,7 @@ method between a uCDN and a delegate dCDN.
 The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation depending on the delegation certificate validity.
 The ACMEDelegationMethod object is defined with several properties shown below.
 
-* Property: ACMEDelegation
+* Property: acme-delegation
 
   * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
   * Type: Link object, according to {{Section 4.3.1 of RFC8006}}
@@ -214,13 +215,13 @@ The ACMEDelegationMethod object is defined with several properties shown below.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
-* Property: Lifetime
+* Property: lifetime
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time, see {{Section 4.3.4 of RFC8006}}
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
-* Property: Lifetime-adjust
+* Property: lifetime-adjust
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Time
@@ -235,25 +236,25 @@ ACME delegation.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACMEDelegation": "https://acme.ucdn.example/delegation/ogfr",
+    "acme-delegation": "https://acme.ucdn.example/delegation/ogfr",
     "time-window": {
       "start": 1665417434,
       "end": 1665676634
     },
-    "Lifetime": 345600,
-    "Lifetime-adjust": 259200
+    "lifetime": 345600,
+    "lifetime-adjust": 259200
   }
 }
 ~~~
 
 The example below shows an `ACMEDelegationMethod` object for a non-STAR ACME
-delegation. Delegation object is defined as per {{section 4.3. of RFC8006}}.
+delegation. The delegation object is defined as per {{Section 4.3 of RFC8006}}.
 
 ~~~json
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "ACMEDelegation": "https://acme.ucdn.example/delegation/wSi5"
+    "acme-delegation": "https://acme.ucdn.example/delegation/wSi5"
   },
   "time-window": {
     "start": 1570982234,
@@ -289,11 +290,22 @@ Encoding:
 
 # Security considerations {#sec}
 
-The delegation objects defined in this document do not add any vulnerabilities to the security
-considerations already specified in the following RFCs: An Automatic Certificate
-Management Environment (ACME) Profile for Generating Delegated Certificates
-{{Section 7.2 and 7.4 of RFC9115}}; the CDNI Metadata {{Section 8.3 of RFC8006}} and CDNI Footprint and Capabilities
-{{RFC8008}}.
+The metadata object defined in this document does not introduce any new
+security or privacy concerns over those already discussed in {{RFC9115}},
+{{RFC8006}} and {{RFC8008}}.
+
+The reader is expected to understand the ACME delegation trust model ({{Section
+7.1 of RFC9115}}) and security goal ({{Section 7.3 of RFC9115}}), in particular
+the criticality around the protection of the user account associated with the
+delegation.
+
+In addition, the requirements defined by CDNI Metadata and CDNI Footprint and
+Capabilities regarding the integrity, (mutual) authentication and
+confidentiality of the communication channel used to transport the metadata
+object apply.
+
+When TLS is used to achieve the above security objectives, the general TLS
+usage guidance in {{RFC7525}} MUST be followed.
 
 --- back
 
