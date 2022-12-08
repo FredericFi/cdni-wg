@@ -5,9 +5,9 @@
 Content Delivery Networks Interconnection                  F. Fieau, Ed.
 Internet-Draft                                                E. Stephan
 Intended status: Standards Track                                  Orange
-Expires: 4 June 2023                                           S. Mishra
+Expires: 11 June 2023                                          S. Mishra
                                                                  Verizon
-                                                         1 December 2022
+                                                         8 December 2022
 
 
                   CDNI extensions for HTTPS delegation
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2023.
+   This Internet-Draft will expire on 11 June 2023.
 
 Copyright Notice
 
@@ -294,11 +294,11 @@ Table of Contents
    {
      "generic-metadata-type": "MI.ACMEDelegationMethod",
      "generic-metadata-value": {
-       "acme-delegation": "https://acme.ucdn.example/delegation/wSi5"
-     },
-     "time-window": {
-       "start": 1570982234,
-       "end": 1665417434
+       "acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
+       "time-window": {
+         "start": 1570982234,
+         "end": 1665417434
+       }
      }
    }
 
