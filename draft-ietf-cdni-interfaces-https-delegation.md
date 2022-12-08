@@ -254,11 +254,11 @@ delegation. The delegation object is defined as per {{Section 4.3 of RFC8006}}.
 {
   "generic-metadata-type": "MI.ACMEDelegationMethod",
   "generic-metadata-value": {
-    "acme-delegation": "https://acme.ucdn.example/delegation/wSi5"
-  },
-  "time-window": {
-    "start": 1570982234,
-    "end": 1665417434
+    "acme-delegation": "https://acme.ucdn.example/delegation/wSi5",
+    "time-window": {
+      "start": 1570982234,
+      "end": 1665417434
+    }
   }
 }
 ~~~
