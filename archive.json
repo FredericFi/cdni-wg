@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-12-08T00:35:27.449304+00:00",
+  "timestamp": "2022-12-11T00:40:38.024287+00:00",
   "repo": "FredericFi/cdni-wg",
   "labels": [
     {
@@ -599,24 +599,26 @@
       "id": "PR_kwDOHulKFM5EqRqo",
       "title": "fix example",
       "url": "https://github.com/FredericFi/cdni-wg/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
       "createdAt": "2022-12-07T16:25:25Z",
-      "updatedAt": "2022-12-07T16:25:26Z",
+      "updatedAt": "2022-12-08T17:57:39Z",
       "baseRepository": "FredericFi/cdni-wg",
       "baseRefName": "main",
       "baseRefOid": "9d8d12aa3c52a2a2ef8c1eea9c5affcd643af73c",
       "headRepository": "FredericFi/cdni-wg",
       "headRefName": "fix-example",
       "headRefOid": "e10c99980d03b89535751d541947699d80770828",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-12-08T16:56:01Z",
+      "mergedAt": "2022-12-08T16:56:01Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "e9c327188a017adb82ca06aaba1b0ec710ad5fd5"
+      },
       "comments": [],
       "reviews": []
     }
