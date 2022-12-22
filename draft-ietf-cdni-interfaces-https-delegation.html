@@ -25,14 +25,14 @@ the need to share private cryptographic key material between the involved entiti
 <meta content="draft-ietf-cdni-interfaces-https-delegation-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.15.3
-    Python 3.10.8
+    Python 3.10.9
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.1
+    lxml 4.9.2
     MarkupSafe 2.1.1
     pycountry 22.3.5
     PyYAML 6.0
@@ -406,7 +406,7 @@ dl > dd > dl {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
-dl .break {
+:is(dd, span).break {
   display: none;
 }
 
@@ -426,7 +426,7 @@ a[href]:hover {
 a[href].selfRef:hover {
   background-color: var(--highlight-color);
 }
-a.xref {
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
 }
 
@@ -438,7 +438,9 @@ tt, code, pre {
 tt, code {
   /* changing the font for inline elements leads to different ascender
      and descender heights; as we want to retain baseline alignment,
-     remove leading to avoid altering the final height of lines */
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
   line-height: 0;
 }
 :is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
@@ -1050,7 +1052,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Fieau, et al.</td>
-<td class="center">Expires 11 June 2023</td>
+<td class="center">Expires 25 June 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1065,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cdni-interfaces-https-delegation-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-12-08" class="published">8 December 2022</time>
+<time datetime="2022-12-22" class="published">22 December 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-06-11">11 June 2023</time></dd>
+<dd class="expires"><time datetime="2023-06-25">25 June 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1134,7 @@ the need to share private cryptographic key material between the involved entiti
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 June 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 June 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1194,7 +1196,7 @@ the need to share private cryptographic key material between the involved entiti
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-references" class="internal xref">References</a></p>
@@ -1450,9 +1452,9 @@ The ACMEDelegationMethod object is defined with several properties shown below.<
 <li class="normal" id="section-3.1-2.1">
             <p id="section-3.1-2.1.1">Property: acme-delegation<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.1-2.1.2.1">Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see <span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1" class="relref">Section 2.3.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span> for the details).<a href="#section-3.1-2.1.2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.1-2.1.2.1">Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see <span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1.3" class="relref">Section 2.3.1.3</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span> for the details).<a href="#section-3.1-2.1.2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-3.1-2.1.2.2">Type: Link object, according to <span><a href="https://rfc-editor.org/rfc/rfc8006#section-4.3.1" class="relref">Section 4.3.1</a> of [<a href="#RFC8006" class="cite xref">RFC8006</a>]</span><a href="#section-3.1-2.1.2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-3.1-2.1.2.2">Type: String<a href="#section-3.1-2.1.2.2" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-3.1-2.1.2.3">Mandatory-to-Specify: Yes<a href="#section-3.1-2.1.2.3" class="pilcrow">¶</a>
 </li>
@@ -1590,14 +1592,17 @@ MI objects (and any associated capability advertisement)<a href="#section-4.1-1.
 <div id="sec">
 <section id="section-5">
       <h2 id="name-security-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security considerations</a>
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-5-1">The metadata object defined in this document does not introduce any new
 security or privacy concerns over those already discussed in <span>[<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>,
 <span>[<a href="#RFC8006" class="cite xref">RFC8006</a>]</span> and <span>[<a href="#RFC8008" class="cite xref">RFC8008</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The reader is expected to understand the ACME delegation trust model (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>) and security goal (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.3" class="relref">Section 7.3</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>), in particular
+<p id="section-5-2">The reader is expected to understand the ACME delegation trust model (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>) and security goal (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>), in particular
 the criticality around the protection of the user account associated with the
-delegation.<a href="#section-5-2" class="pilcrow">¶</a></p>
+delegation.
+For example, the delegation object pointed by the <code>acme-delegation</code> property is
+only accessible to the holder of the account key, which is allowed to fetch its
+content exclusively via POST-as-GET (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1.2" class="relref">Section 2.3.1.2</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>).<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">In addition, the requirements defined by CDNI Metadata and CDNI Footprint and
 Capabilities regarding the integrity, (mutual) authentication and
 confidentiality of the communication channel used to transport the metadata
