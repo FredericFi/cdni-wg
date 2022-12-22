@@ -69,7 +69,7 @@ This document defines metadata objects to support delegating the delivery of
 HTTPS content between two or more interconnected CDNs.  Specifically, this
 document defines CDNI Metadata interface objects to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
-RFC9115. RFC 9115 allows delegating entities to remain in full
+RFC9115. RFC9115 allows delegating entities to remain in full
 control of the delegation and be able to revoke it any time and avoids
 the need to share private cryptographic key material between the involved entities.
 
@@ -201,7 +201,7 @@ method between a uCDN and a delegate dCDN.
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
 The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation depending on the delegation certificate validity.
-The ACMEDelegationMethod object is defined with several properties shown below.
+The ACMEDelegationMethod object is defined with the properties shown below.
 
 * Property: acme-delegation
 
@@ -211,20 +211,20 @@ The ACMEDelegationMethod object is defined with several properties shown below.
 
 * Property: time-window
 
-  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time of the window. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity in Epoch time format. In the case of the non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
+  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In the case of the non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
 * Property: lifetime
 
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time, see {{Section 4.3.4 of RFC8006}}
+  * Type: Integer
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
 * Property: lifetime-adjust
 
   * Description: See {{Section 3.1.1 of RFC8739}}
-  * Type: Time
+  * Type: Integer
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
 ### Examples
@@ -302,10 +302,11 @@ For example, the delegation object pointed by the `acme-delegation` property is
 only accessible to the holder of the account key, which is allowed to fetch its
 content exclusively via POST-as-GET ({{Section 2.3.1.2 of RFC9115}}).
 
-In addition, the requirements defined by CDNI Metadata and CDNI Footprint and
-Capabilities regarding the integrity, (mutual) authentication and
-confidentiality of the communication channel used to transport the metadata
-object apply.
+In addition, the Metadata interface authentication and confidentiality requirements
+defined in {{Section 8.1. of RFC80006}}, {{Section 8.2. of RFC8006}} and {{Section 8.3. of RFC8006}}
+MUST be followed to prevent unauthorized access to the ACME delegation object.
+
+Implementers MUST adhere to the security considerations defined in the CDNI Request Routing: Footprint and Capabilities Semantics, {{Section 7. of RFC8008}}.
 
 When TLS is used to achieve the above security objectives, the general TLS
 usage guidance in {{RFC9325}} MUST be followed.
