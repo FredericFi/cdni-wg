@@ -205,8 +205,8 @@ The ACMEDelegationMethod object is defined with several properties shown below.
 
 * Property: acme-delegation
 
-  * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1 of RFC9115}} for the details).
-  * Type: Link object, according to {{Section 4.3.1 of RFC8006}}
+  * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1.3 of RFC9115}} for the details).
+  * Type: String
   * Mandatory-to-Specify: Yes
 
 * Property: time-window
@@ -288,16 +288,19 @@ Interface:
 Encoding:
 : See {{mi-metadata}}
 
-# Security considerations {#sec}
+# Security Considerations {#sec}
 
 The metadata object defined in this document does not introduce any new
 security or privacy concerns over those already discussed in {{RFC9115}},
 {{RFC8006}} and {{RFC8008}}.
 
 The reader is expected to understand the ACME delegation trust model ({{Section
-7.1 of RFC9115}}) and security goal ({{Section 7.3 of RFC9115}}), in particular
+7.1 of RFC9115}}) and security goal ({{Section 7.2 of RFC9115}}), in particular
 the criticality around the protection of the user account associated with the
 delegation.
+For example, the delegation object pointed by the `acme-delegation` property is
+only accessible to the holder of the account key, which is allowed to fetch its
+content exclusively via POST-as-GET ({{Section 2.3.1.2 of RFC9115}}).
 
 In addition, the requirements defined by CDNI Metadata and CDNI Footprint and
 Capabilities regarding the integrity, (mutual) authentication and
