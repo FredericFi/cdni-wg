@@ -3,7 +3,7 @@ v: 3
 
 title: CDNI metadata for ACME-based delegation
 abbrev: CDNI metadata for ACME-based delegation
-docname: draft-ietf-cdni-interfaces-https-delegation-latest
+docname: draft-ietf-cdni-metadata-acme-delegation-latest
 
 category: std
 consensus: true
