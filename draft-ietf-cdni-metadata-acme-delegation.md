@@ -303,7 +303,7 @@ only accessible to the holder of the account key, which is allowed to fetch its
 content exclusively via POST-as-GET ({{Section 2.3.1.2 of RFC9115}}).
 
 In addition, the Metadata interface authentication and confidentiality requirements
-defined in {{Section 8.1. of RFC80006}}, {{Section 8.2. of RFC8006}} and {{Section 8.3. of RFC8006}}
+defined in {{Section 8.1. of RFC8006}}, {{Section 8.2. of RFC8006}} and {{Section 8.3. of RFC8006}}
 MUST be followed to prevent unauthorized access to the ACME delegation object.
 
 Implementers MUST adhere to the security considerations defined in the CDNI Request Routing: Footprint and Capabilities Semantics, {{Section 7. of RFC8008}}.
