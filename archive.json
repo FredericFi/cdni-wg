@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-12-22T00:35:53.988580+00:00",
+  "timestamp": "2022-12-25T00:37:59.193186+00:00",
   "repo": "FredericFi/cdni-wg",
   "labels": [
     {
@@ -627,24 +627,26 @@
       "id": "PR_kwDOHulKFM5F-J89",
       "title": "Review comments",
       "url": "https://github.com/FredericFi/cdni-wg/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "* fix acme-delegation description (use String and increase ref precision)\r\n* add some words about the security of the acme-delegation resource to the security considerations\r\n* missing upper-case in seccons title\r\n\r\nSigned-off-by: Thomas Fossati <thomas.fossati@arm.com>",
       "createdAt": "2022-12-21T16:09:35Z",
-      "updatedAt": "2022-12-21T16:09:36Z",
+      "updatedAt": "2022-12-22T16:43:57Z",
       "baseRepository": "FredericFi/cdni-wg",
       "baseRefName": "main",
       "baseRefOid": "e9c327188a017adb82ca06aaba1b0ec710ad5fd5",
       "headRepository": "FredericFi/cdni-wg",
       "headRefName": "seccon-review",
       "headRefOid": "6074987ffb93ce99da95b554f9e825517747f02f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-12-22T16:43:56Z",
+      "mergedAt": "2022-12-22T16:43:56Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "7471d76b1b33d2726a2e5a441b3872efddf02e21"
+      },
       "comments": [],
       "reviews": []
     }
