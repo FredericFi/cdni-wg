@@ -1,9 +1,9 @@
 ---
 v: 3
 
-title: CDNI metadata for ACME-based delegation
-abbrev: CDNI metadata for ACME-based delegation
-docname: draft-ietf-cdni-metadata-acme-delegation-latest
+title: CDNI delegation using Automated Certificate Management Environment
+abbrev: CDNI delegation using ACME
+docname: draft-ietf-cdni-delegation-acme-latest
 
 category: std
 consensus: true
