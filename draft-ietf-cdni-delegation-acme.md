@@ -65,9 +65,9 @@ entity:
 
 --- abstract
 
-This document defines metadata objects to support delegating the delivery of
+This document defines metadata to support delegating the delivery of
 HTTPS content between two or more interconnected CDNs.  Specifically, this
-document defines CDNI Metadata interface objects to enable delegation of
+document defines a CDNI Metadata interface object to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
 RFC9115. RFC9115 allows delegating entities to remain in full
 control of the delegation and be able to revoke it any time and avoids
@@ -99,13 +99,13 @@ security considerations.
 This document uses terminology from CDNI framework documents such as: CDNI
 framework document {{RFC7336}}, CDNI requirements {{RFC7337}} and CDNI
 interface specifications documents: CDNI Metadata interface {{RFC8006}} and
-CDNI Footprint and capabilities {{RFC8008}}.  It also uses terminology from
+CDNI Footprint & Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
 {{Section 1.1 of RFC8739}}.
 
 
 # Advertising Delegation Metadata for CDNI through FCI {#fci-metadata}
 
-The Footprint and Capabilities interface defined in {{RFC8008}} allows a
+The Footprint and Capabilities Advertisement interface defined in {{RFC8008}} allows a
 dCDN to send a FCI capability type object to a uCDN.
 
 The FCI.Metadata object allows a dCDN to advertise the capabilities
@@ -135,7 +135,7 @@ object for a dCDN implementing the ACME delegation method.
 
 # ACME Delegation Metadata for CDNI {#mi-metadata}
 
-When a uCDN delegates to a dCDN to deliver HTTPS traffic using DNS Redirection
+When a uCDN delegates a dCDN to delivery of HTTPS traffic using DNS Redirection
 {{RFC7975}}, the dCDN must use a certificate bound to the origin's name to
 successfully authenticate to the end-user (see also {{Section 5.1.2.1 of
 RFC9115}}).
@@ -144,7 +144,7 @@ To that end, this section defines the AcmeDelegationMethod object which
 describes metadata for using the ACME delegation interface {{RFC9115}}.
 
 The ACMEDelegationMethod applies to both ACME STAR delegation, which provides a
-delegation model based on short-term certificates with automatic renewal {{Section 2.3.2 of RFC9115}}, and
+delegation model based on short-term certificates with automatic renewal ({{Section 2.3.2 of RFC9115}}), and
 non-STAR delegation, which allows delegation between CDNs using long-term
 certificates {{Section 2.3.3 of RFC9115}}.
 
@@ -200,7 +200,7 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object allows a uCDN to both define STAR and non-STAR delegation depending on the delegation certificate validity.
+The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by presence (or absence) of the lifetime properties. That is, the presence of "lifetime" and "lifetime-adjust" explicitly means a short-term delegation with lifetime of the certificate based on those properties. A non-STAR delegation will not have the lifetime properties in the delegation [see sec 3.1.1.].
 The ACMEDelegationMethod object is defined with the properties shown below.
 
 * Property: acme-delegation
@@ -225,7 +225,7 @@ The ACMEDelegationMethod object is defined with the properties shown below.
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Integer
-  * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
+  * Mandatory-to-Specify: No
 
 ### Examples
 
