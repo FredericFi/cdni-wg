@@ -70,7 +70,7 @@ HTTPS content between two or more interconnected CDNs.  Specifically, this
 document defines a CDNI Metadata interface object to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
 RFC9115. RFC9115 allows delegating entities to remain in full
-control of the delegation and be able to revoke it any time and avoids
+control of the delegation and be able to revoke it any time and this avoids
 the need to share private cryptographic key material between the involved entities.
 
 --- middle
