@@ -99,13 +99,13 @@ security considerations.
 This document uses terminology from CDNI framework documents such as: CDNI
 framework document {{RFC7336}}, CDNI requirements {{RFC7337}} and CDNI
 interface specifications documents: CDNI Metadata interface {{RFC8006}} and
-CDNI Footprint & Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
+CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
 {{Section 1.1 of RFC8739}}.
 
 
 # Advertising Delegation Metadata for CDNI through FCI {#fci-metadata}
 
-The Footprint and Capabilities Advertisement interface defined in {{RFC8008}} allows a
+The Footprint and Capabilities Advertisement interface (FCI) defined in {{RFC8008}} allows a
 dCDN to send a FCI capability type object to a uCDN.
 
 The FCI.Metadata object allows a dCDN to advertise the capabilities
@@ -135,7 +135,7 @@ object for a dCDN implementing the ACME delegation method.
 
 # ACME Delegation Metadata for CDNI {#mi-metadata}
 
-When a uCDN delegates a dCDN to delivery of HTTPS traffic using DNS Redirection
+When a uCDN delegates a dCDN the delivery of HTTPS traffic using DNS Redirection
 {{RFC7975}}, the dCDN must use a certificate bound to the origin's name to
 successfully authenticate to the end-user (see also {{Section 5.1.2.1 of
 RFC9115}}).
@@ -200,7 +200,8 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by presence (or absence) of the lifetime properties. That is, the presence of "lifetime" and "lifetime-adjust" explicitly means a short-term delegation with lifetime of the certificate based on those properties. A non-STAR delegation will not have the lifetime properties in the delegation [see sec 3.1.1.].
+The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by the presence (or absence) of the "lifetime" property. That is, the presence of the "lifetime" property explicitly means a short-term delegation with lifetime of the certificate based on that property (and the optional "lifetime-adjust" attribute). A non-STAR delegation will not have the "lifetime" property in the delegation.  See also the examples in {{examples}}.
+
 The ACMEDelegationMethod object is defined with the properties shown below.
 
 * Property: acme-delegation
@@ -227,7 +228,7 @@ The ACMEDelegationMethod object is defined with the properties shown below.
   * Type: Integer
   * Mandatory-to-Specify: No
 
-### Examples
+### Examples {#examples}
 
 The following example shows an `ACMEDelegationMethod` object for a STAR-based
 ACME delegation.
