@@ -212,7 +212,7 @@ The ACMEDelegationMethod object is defined with the properties shown below.
 
 * Property: time-window
 
-  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In the case of the non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
+  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time. In case of STAR method, the "start" and "end" properties of the window MUST be understood respectively as the start-date and end-date of the certificate validity. In the case of the non-STAR method, the "start" and "end" properties of the window MUST be understood respectively as the notBefore and notAfter fields of the certificate.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
