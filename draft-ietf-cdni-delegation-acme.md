@@ -200,7 +200,7 @@ method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by the presence (or absence) of the "lifetime" property. That is, the presence of the "lifetime" property explicitly means a short-term delegation with lifetime of the certificate based on that property (and the optional "lifetime-adjust" attribute). A non-STAR delegation will not have the "lifetime" property in the delegation.  See also the examples in {{examples}}.
+The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by the presence (or absence) of the "star-lifetime" property. That is, the presence of the "star-lifetime" property explicitly means a short-term delegation with lifetime of the certificate based on that property (and the optional "star-lifetime-adjust" attribute). A non-STAR delegation will not have the "star-lifetime" property in the delegation.  See also the examples in {{examples}}.
 
 The ACMEDelegationMethod object is defined with the properties shown below.
 
@@ -216,13 +216,13 @@ The ACMEDelegationMethod object is defined with the properties shown below.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
-* Property: lifetime
+* Property: star-lifetime
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Integer
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
-* Property: lifetime-adjust
+* Property: star-lifetime-adjust
 
   * Description: See {{Section 3.1.1 of RFC8739}}
   * Type: Integer
@@ -242,8 +242,8 @@ ACME delegation.
       "start": 1665417434,
       "end": 1665676634
     },
-    "lifetime": 345600,
-    "lifetime-adjust": 259200
+    "star-lifetime": 345600,
+    "star-lifetime-adjust": 259200
   }
 }
 ~~~
