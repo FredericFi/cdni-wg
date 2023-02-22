@@ -287,7 +287,7 @@ Interface:
 : MI/FCI
 
 Encoding:
-: See {{mi-metadata}}
+: See {{acmedeleobj}}
 
 # Security Considerations {#sec}
 
