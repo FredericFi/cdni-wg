@@ -212,7 +212,7 @@ The ACMEDelegationMethod object is defined with the properties shown below.
 
 * Property: time-window
 
-  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time. In case of STAR method, the "start" and "end" properties of the window must be understood respectively as the start-date and end-date of the certificate validity. In the case of the non-STAR method, the "start" and "end" properties of the window must be understood respectively as the notBefore and notAfter fields of the certificate.
+  * Description: Validity period of the certificate. According to {{Section 4.3.4 of RFC8006}}, a TimeWindow object is defined by a window "start" time, and a window "end" time. In case of STAR method, the "start" and "end" properties of the window MUST be understood respectively as the start-date and end-date of the certificate validity. In the case of the non-STAR method, the "start" and "end" properties of the window MUST be understood respectively as the notBefore and notAfter fields of the certificate.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
@@ -287,7 +287,7 @@ Interface:
 : MI/FCI
 
 Encoding:
-: See {{mi-metadata}}
+: See {{acmedeleobj}}
 
 # Security Considerations {#sec}
 
@@ -298,16 +298,17 @@ security or privacy concerns over those already discussed in {{RFC9115}},
 The reader is expected to understand the ACME delegation trust model ({{Section
 7.1 of RFC9115}}) and security goal ({{Section 7.2 of RFC9115}}), in particular
 the criticality around the protection of the user account associated with the
-delegation.
-For example, the delegation object pointed by the `acme-delegation` property is
-only accessible to the holder of the account key, which is allowed to fetch its
+delegation, which authorizes all the security relevant operations between dCDN
+and uCDN over the ACME channel.
+The dCDN's ACME account is also relevant to the privacy of the entire scheme;
+for example, the `acme-delegation` resource in the Metadata object is only
+accessible to the holder of the account key, who is allowed to fetch its
 content exclusively via POST-as-GET ({{Section 2.3.1.2 of RFC9115}}).
 
-In addition, the Metadata interface authentication and confidentiality requirements
-defined in {{Section 8.1. of RFC8006}}, {{Section 8.2. of RFC8006}} and {{Section 8.3. of RFC8006}}
-MUST be followed to prevent unauthorized access to the ACME delegation object.
+In addition, the Metadata interface authentication and confidentiality
+requirements defined in {{Section 8 of RFC8006}} MUST be followed.
 
-Implementers MUST adhere to the security considerations defined in the CDNI Request Routing: Footprint and Capabilities Semantics, {{Section 7. of RFC8008}}.
+Implementers MUST adhere to the security considerations defined in the CDNI Request Routing: Footprint and Capabilities Semantics, {{Section 7 of RFC8008}}.
 
 When TLS is used to achieve the above security objectives, the general TLS
 usage guidance in {{RFC9325}} MUST be followed.
