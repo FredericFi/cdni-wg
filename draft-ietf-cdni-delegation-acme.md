@@ -102,6 +102,7 @@ interface specifications documents: CDNI Metadata interface {{RFC8006}} and
 CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
 {{Section 1.1 of RFC8739}}.
 
+{::boilerplate bcp14}
 
 # Advertising Delegation Metadata for CDNI through FCI {#fci-metadata}
 
@@ -135,7 +136,7 @@ object for a dCDN implementing the ACME delegation method.
 
 # ACME Delegation Metadata for CDNI {#mi-metadata}
 
-When a uCDN delegates a dCDN the delivery of HTTPS traffic using DNS Redirection
+When a uCDN delegates the delivery of HTTPS traffic to a dCDN using DNS Redirection
 {{RFC7975}}, the dCDN must use a certificate bound to the origin's name to
 successfully authenticate to the end-user (see also {{Section 5.1.2.1 of
 RFC9115}}).
