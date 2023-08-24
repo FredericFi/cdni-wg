@@ -1,0 +1,830 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-03-16T00:39:49.801674+00:00",
+  "repo": "FredericFi/cdni-wg",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 4,
+      "id": "I_kwDOHulKFM5R1vaN",
+      "title": "Beautify the sequence diagram to represent flows between dCDN, uCDN, CP and the ACME CA",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/4",
+      "state": "CLOSED",
+      "author": "smishra1200",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "CC @thomas-fossati ",
+      "createdAt": "2022-09-14T14:02:00Z",
+      "updatedAt": "2022-09-27T14:10:21Z",
+      "closedAt": "2022-09-27T14:10:21Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "SVG rendering here: https://fredericfi.github.io/cdni-wg/dia/draft-ietf-cdni-interfaces-https-delegation.html#name-example-call-flow-of-star-d",
+          "createdAt": "2022-09-20T14:05:09Z",
+          "updatedAt": "2022-09-20T14:05:09Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOHulKFM5R1vvI",
+      "title": "define configuration attributes for STAR and non-STAR flows",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/5",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "The idea is to have the uCDN providing hints for the dCDN order request.\r\n\r\n* For STAR orders, the [`auto-renewal`](https://www.rfc-editor.org/rfc/rfc8739.html#section-5.4) properties:\r\n\r\n```json\r\n\"acme-star-hints\" : {\r\n  \"start-date\": \"\",\r\n  \"end-date\": \"\",\r\n  \"lifetime\": \"\",\r\n  \"lifetime-adjust\": \"\",\r\n}\r\n```\r\n\r\n* For non-STAR orders, there doesn't seem to be anything specific for the time being.",
+      "createdAt": "2022-09-14T14:02:50Z",
+      "updatedAt": "2022-10-12T14:18:16Z",
+      "closedAt": "2022-10-12T14:18:16Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We need to decide whether these hints should be part of the ACME delegation object (alongside the CSR template and optional CNAME mappings), or of the CDNI interface.\r\n\r\nWe should involve @yaronf.",
+          "createdAt": "2022-09-27T12:42:35Z",
+          "updatedAt": "2022-09-27T12:42:35Z"
+        },
+        {
+          "author": "smishra1200",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi Thomas - Thanks for the updates. Sure, do you want to add Yaron in\nGithub or Fred will need to him?\n\nThanks\nSanjay\n\nOn Tue, Sep 27, 2022 at 8:42 AM Thomas Fossati ***@***.***>\nwrote:\n\n> We need to decide whether these hints should be part of the ACME\n> delegation object (alongside the CSR template and optional CNAME mappings),\n> or of the CDNI interface.\n>\n> We should involve @yaronf\n> <https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_yaronf&d=DwMCaQ&c=udBTRvFvXC5Dhqg7UHpJlPps3mZ3LRxpb6__0PomBTQ&r=XniVbishGiO2Ao9hKqSc-hTVIWCi3T-x6GdHR4ZTgoM&m=khMltZMp26qyr3o_tjRmLcqmFd_VOy9GzX4ua4-tjMjAGosxh3I1ulaZXpxet9Zg&s=esXEfECx-Dax6ndFYwrr-IY0-M1R9pKzZspXjD9SPSM&e=>\n> .\n>\n> \u2014\n> Reply to this email directly, view it on GitHub\n> <https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_FredericFi_cdni-2Dwg_issues_5-23issuecomment-2D1259451418&d=DwMCaQ&c=udBTRvFvXC5Dhqg7UHpJlPps3mZ3LRxpb6__0PomBTQ&r=XniVbishGiO2Ao9hKqSc-hTVIWCi3T-x6GdHR4ZTgoM&m=khMltZMp26qyr3o_tjRmLcqmFd_VOy9GzX4ua4-tjMjAGosxh3I1ulaZXpxet9Zg&s=pBxk6anSiydJ5ZeSX_Uk8_gtMch6YteJjxE-X-U3jtc&e=>,\n> or unsubscribe\n> <https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_notifications_unsubscribe-2Dauth_ABGNJTANEK5X3JVA5WPIBRDWALTUNANCNFSM6AAAAAAQMONMLY&d=DwMCaQ&c=udBTRvFvXC5Dhqg7UHpJlPps3mZ3LRxpb6__0PomBTQ&r=XniVbishGiO2Ao9hKqSc-hTVIWCi3T-x6GdHR4ZTgoM&m=khMltZMp26qyr3o_tjRmLcqmFd_VOy9GzX4ua4-tjMjAGosxh3I1ulaZXpxet9Zg&s=WNFA9ORx8nXsifm4Sg0u3QRKqnvMyRrx4E13u6i4VZI&e=>\n> .\n> You are receiving this because you are subscribed to this thread.Message\n> ID: ***@***.***>\n>\n",
+          "createdAt": "2022-09-27T20:11:07Z",
+          "updatedAt": "2022-09-27T20:11:07Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOHulKFM5R1wFj",
+      "title": "create distinct STAR and non-STAR metadata",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/6",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "FredericFi"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-09-14T14:03:41Z",
+      "updatedAt": "2022-10-12T14:18:22Z",
+      "closedAt": "2022-10-12T14:18:22Z",
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOHulKFM5SuM7c",
+      "title": "remove 9115 DNS redirection diagram",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/8",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "add a reference instead.",
+      "createdAt": "2022-09-27T14:14:47Z",
+      "updatedAt": "2022-10-12T14:18:06Z",
+      "closedAt": "2022-10-12T14:18:06Z",
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOHulKFM5S28a8",
+      "title": "Update abstract text to define the problem statement better",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/9",
+      "state": "CLOSED",
+      "author": "smishra1200",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "smishra1200"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-09-29T01:46:49Z",
+      "updatedAt": "2022-09-29T14:48:34Z",
+      "closedAt": "2022-09-29T14:48:34Z",
+      "comments": [
+        {
+          "author": "smishra1200",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Fixed by [3b4199d](https://github.com/FredericFi/cdni-wg/commit/3b4199d64358a34bcce3d28e6338cfe9f074f368)",
+          "createdAt": "2022-09-29T14:48:24Z",
+          "updatedAt": "2022-09-29T14:48:24Z"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "I_kwDOHulKFM5e6_V1",
+      "title": "draft-ietf-cdni-delegation-acme-00 (Review from Kevin Ma from Feb 17, 2023)",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/22",
+      "state": "CLOSED",
+      "author": "smishra1200",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "FredericFi"
+      ],
+      "labels": [],
+      "body": " - in the time-window description, should the \"must\"s be capital \"MUST\"s?  if not, can we rephrase?\r\n    _Agree. We should replace \"must\" with \"MUST\" in the description._\r\n - in section 4.1, make the reference to section 3.1 instead of 3\r\n    _Agree._\r\n - in the security considerations, i still think it would be useful to add a sentence about what an attacker could do if they got the \r\n    acme-delegation URL.  could they generate certs and masquerade as the site, or is it innocuous?  \r\n    \r\nFor above, based on email exchange between Thomas Fossati and Kevin,  maybe append the extra text, such as below at the end of the 2nd paragraph of section 5:\r\n\r\n\" _That is, the acme-delegation URL is an access controlled resource that is accessible only to the ACME account owner (i.e., dCDN), i.e., its visibility is protected by the dCDN's ACME account credential (see section 2.1 of RFC 9115)._\"",
+      "createdAt": "2023-02-20T22:34:17Z",
+      "updatedAt": "2023-02-23T16:35:00Z",
+      "closedAt": "2023-02-23T16:35:00Z",
+      "comments": []
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOHulKFM5e6_1S",
+      "title": "draft-ietf-cdni-delegation-acme-00 (comment from Thomas Feb 13, 2023)",
+      "url": "https://github.com/FredericFi/cdni-wg/issues/23",
+      "state": "CLOSED",
+      "author": "smishra1200",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "FredericFi"
+      ],
+      "labels": [],
+      "body": "Comment from Thomas \r\n\"The last suggestion I have is to change the \u201clifetime\u201d and \u201clifetime-adjust\u201d attributes to \u201cstar-lifetime\u201d and \u201cstar-lifetime-adjust\u201d.\r\nThis makes it is visually evident when a delegation is STAR vs non-STAR.\r\n_Agree._",
+      "createdAt": "2023-02-20T22:36:35Z",
+      "updatedAt": "2023-02-23T16:34:08Z",
+      "closedAt": "2023-02-23T16:34:08Z",
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOHulKFM48O5u-",
+      "title": "fix lint error",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/1",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-07-28T08:49:50Z",
+      "updatedAt": "2022-08-01T15:55:48Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "72b167729a0798c38b96c4a59eb34a6759755892",
+      "headRepository": "thomas-fossati/cdni-wg",
+      "headRefName": "main",
+      "headRefOid": "7f4d1b05e7c1735054108a1df65edf4bfbba6026",
+      "closedAt": "2022-08-01T15:55:48Z",
+      "mergedAt": "2022-08-01T15:55:48Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "ae3c8dc93c9992dce8bd442823ef7fbc90764a2d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOHulKFM4-vaG3",
+      "title": "xml2rfc -> kramdown-rfc",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/2",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-09-11T22:44:59Z",
+      "updatedAt": "2022-11-21T09:53:55Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "ae3c8dc93c9992dce8bd442823ef7fbc90764a2d",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "kramdown-rfc",
+      "headRefOid": "d86f78ff2b041d07c21588f365d0b2689a47ac96",
+      "closedAt": "2022-09-12T15:55:14Z",
+      "mergedAt": "2022-09-12T15:55:14Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "ca6683a6261171c0a1fb446850d29f217c14fbc7"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOHulKFM4-8p_I",
+      "title": "Update draft-ietf-cdni-interfaces-https-delegation.md",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/3",
+      "state": "MERGED",
+      "author": "smishra1200",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Updated text in Abstract",
+      "createdAt": "2022-09-14T13:56:22Z",
+      "updatedAt": "2022-09-27T14:10:46Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "ca6683a6261171c0a1fb446850d29f217c14fbc7",
+      "headRepository": "smishra1200/cdni-wg",
+      "headRefName": "patch-1",
+      "headRefOid": "8aafb7a5e74ddc732ae7384c7202ffa98de747e1",
+      "closedAt": "2022-09-27T14:10:46Z",
+      "mergedAt": "2022-09-27T14:10:46Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "4ac4919ecc2e84e4d0ff362773b2e0c178e7f4bd"
+      },
+      "comments": [
+        {
+          "author": "smishra1200",
+          "authorAssociation": "COLLABORATOR",
+          "body": "CC @thomas-fossati ",
+          "createdAt": "2022-09-14T13:58:02Z",
+          "updatedAt": "2022-09-14T13:58:02Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHulKFM5C3qGb",
+          "commit": {
+            "abbreviatedOid": "8aafb7a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-09-27T12:26:24Z",
+          "updatedAt": "2022-09-27T12:26:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOHulKFM4_Rzrn",
+      "title": "sequence diagram revamp",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/7",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #4\r\n\r\nSigned-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-09-20T13:57:58Z",
+      "updatedAt": "2022-09-27T14:10:20Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "ca6683a6261171c0a1fb446850d29f217c14fbc7",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "dia",
+      "headRefOid": "97ad567f6478dcd47b9c2df8391f9552354d12fd",
+      "closedAt": "2022-09-27T14:10:20Z",
+      "mergedAt": "2022-09-27T14:10:20Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "8774c93aa4beb64d2d02337659ff57a13de00dc0"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOHulKFM5ADtVd",
+      "title": "Non-STAR + new objects and properties",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/10",
+      "state": "CLOSED",
+      "author": "FredericFi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "added: Non-STAR delegation method  + new CertValidity object",
+      "createdAt": "2022-10-03T13:49:49Z",
+      "updatedAt": "2022-10-12T14:17:48Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "3b4199d64358a34bcce3d28e6338cfe9f074f368",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "FredericFi-patch-1",
+      "headRefOid": "1d35d14f7503e16ea5985e988dea404a62bcacca",
+      "closedAt": "2022-10-12T14:17:48Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOHulKFM5AD0bI",
+      "title": "Update draft-ietf-cdni-interfaces-https-delegation.md",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/11",
+      "state": "CLOSED",
+      "author": "FredericFi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-03T14:11:02Z",
+      "updatedAt": "2022-10-03T14:29:33Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "FredericFi-patch-1",
+      "baseRefOid": "1d35d14f7503e16ea5985e988dea404a62bcacca",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "FredericFi-patch-2",
+      "headRefOid": "e6239935d5560c485113d886bf352e33d46b2ae4",
+      "closedAt": "2022-10-03T14:29:33Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOHulKFM5AD1P9",
+      "title": "Update draft-ietf-cdni-interfaces-https-delegation.md",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/12",
+      "state": "CLOSED",
+      "author": "FredericFi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-03T14:13:33Z",
+      "updatedAt": "2022-10-03T17:24:35Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "FredericFi-patch-2",
+      "baseRefOid": "e6239935d5560c485113d886bf352e33d46b2ae4",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "FredericFi-patch-3",
+      "headRefOid": "935e8ec91d5748d3b6cf6894c9981a09fe9b7a39",
+      "closedAt": "2022-10-03T17:24:35Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOHulKFM5AH2Jd",
+      "title": "small adjustments here and there",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/13",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-10-04T10:30:43Z",
+      "updatedAt": "2022-11-21T09:53:50Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "9308126632219f928c75d373625fe3751deaa359",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "thomas-review",
+      "headRefOid": "95997600ee5d1d1fa5c78b81841dcae9c2f65513",
+      "closedAt": "2022-10-10T14:07:16Z",
+      "mergedAt": "2022-10-10T14:07:16Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "19fdfaf3557ebd8c7b2317612f43893753f2a952"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOHulKFM5Aheg6",
+      "title": "Update draft-ietf-cdni-interfaces-https-delegation.md",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/14",
+      "state": "MERGED",
+      "author": "FredericFi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-10T21:16:01Z",
+      "updatedAt": "2022-10-10T21:18:45Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "ff9eea762faa4d3e8c9ae84901e7de656f830b33",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "few-changes-here-and-there.-Added-some-explanations-in-the-metadata-part",
+      "headRefOid": "a0f7ff199d7c64bc1b13aa12e76c8e1491a773fb",
+      "closedAt": "2022-10-10T21:18:44Z",
+      "mergedAt": "2022-10-10T21:18:44Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "0536c3507f73cb1d7c8a3402ff0658fc9c53cd4f"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOHulKFM5BHLux",
+      "title": "typo fixes to make the draft compile",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/15",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-10-19T14:05:13Z",
+      "updatedAt": "2022-11-21T09:53:48Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "20ddde2a77caa8111de4bda5225e159295cc113f",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "typographic-fixes",
+      "headRefOid": "0b8d20aec35e4489b4be99d3b8c2a1d0251ea0c7",
+      "closedAt": "2022-10-22T06:08:00Z",
+      "mergedAt": "2022-10-22T06:08:00Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "dadbce5f0d0b4c1d5a4b9294f1d98d7b385ce810"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOHulKFM5DWCcD",
+      "title": "fix JSON syntax in examples",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/16",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Note: inserting C-style comments in the JSON examples will fail validation.\r\nIf we need to add contextual explanations about an example, that should be done in the surrounding prose.\r\n\r\nSigned-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-11-21T10:44:19Z",
+      "updatedAt": "2022-11-23T16:58:59Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "11aa37eb74855d0ea401fea0757470e3e248e9b0",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "json-fixes",
+      "headRefOid": "ebd8369668cace316d853baad35425b3d3157905",
+      "closedAt": "2022-11-23T16:50:36Z",
+      "mergedAt": "2022-11-23T16:50:35Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "b78bd20ebc1f38abda6418b8251de0ea32a5e72b"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOHulKFM5DmG7r",
+      "title": "stab at the security considerations",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/17",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-11-23T20:37:05Z",
+      "updatedAt": "2022-12-01T17:26:16Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "34f18a4a9a7ccf41940f7470981a158c77187254",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "sec-cons-review",
+      "headRefOid": "70f747c8014604d6bb6c87cd3ccdf01345dbca08",
+      "closedAt": "2022-12-01T17:26:16Z",
+      "mergedAt": "2022-12-01T17:26:16Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "9d8d12aa3c52a2a2ef8c1eea9c5affcd643af73c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHulKFM5Hfq-4",
+          "commit": {
+            "abbreviatedOid": "d2f4c77"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-30T14:58:01Z",
+          "updatedAt": "2022-11-30T14:58:01Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\nusage guidance in {{RFC9325}} MUST be followed.\r\n```",
+              "createdAt": "2022-11-30T14:58:01Z",
+              "updatedAt": "2022-11-30T14:58:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHulKFM5HfrIg",
+          "commit": {
+            "abbreviatedOid": "d2f4c77"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-11-30T14:58:19Z",
+          "updatedAt": "2022-11-30T14:58:20Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n  RFC9325:\r\n```",
+              "createdAt": "2022-11-30T14:58:19Z",
+              "updatedAt": "2022-11-30T14:58:20Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOHulKFM5DmHwZ",
+      "title": "Typo coherency",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/18",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-11-23T20:40:24Z",
+      "updatedAt": "2022-12-01T17:26:03Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "34f18a4a9a7ccf41940f7470981a158c77187254",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "typo-coherency",
+      "headRefOid": "3de55664f9c26ef69ad80beaa1d0982b7b400a77",
+      "closedAt": "2022-12-01T17:26:03Z",
+      "mergedAt": "2022-12-01T17:26:03Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "1cc3931169880188c56c89dc7ee225f5774fe3a0"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOHulKFM5EqRqo",
+      "title": "fix example",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/19",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-12-07T16:25:25Z",
+      "updatedAt": "2022-12-08T17:57:39Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "9d8d12aa3c52a2a2ef8c1eea9c5affcd643af73c",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "fix-example",
+      "headRefOid": "e10c99980d03b89535751d541947699d80770828",
+      "closedAt": "2022-12-08T16:56:01Z",
+      "mergedAt": "2022-12-08T16:56:01Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "e9c327188a017adb82ca06aaba1b0ec710ad5fd5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOHulKFM5F-J89",
+      "title": "Review comments",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/20",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* fix acme-delegation description (use String and increase ref precision)\r\n* add some words about the security of the acme-delegation resource to the security considerations\r\n* missing upper-case in seccons title\r\n\r\nSigned-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-12-21T16:09:35Z",
+      "updatedAt": "2022-12-22T16:43:57Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "e9c327188a017adb82ca06aaba1b0ec710ad5fd5",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "seccon-review",
+      "headRefOid": "6074987ffb93ce99da95b554f9e825517747f02f",
+      "closedAt": "2022-12-22T16:43:56Z",
+      "mergedAt": "2022-12-22T16:43:56Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "7471d76b1b33d2726a2e5a441b3872efddf02e21"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOHulKFM5J4EEG",
+      "title": "Some typographic nits",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/21",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2023-02-13T18:24:14Z",
+      "updatedAt": "2023-02-14T09:55:31Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "14e2a36a9ec9198675b06a9fb118384eb90b96f6",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "nits",
+      "headRefOid": "82e6b1d9dffff1475587bd7c3e1d873b97dec7a3",
+      "closedAt": "2023-02-14T09:55:30Z",
+      "mergedAt": "2023-02-14T09:55:30Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "4bc4e894de45686dbd4e3f05e2c4ca70ff502b3e"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOHulKFM5KjuYA",
+      "title": "Kevin's comments",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/24",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #22 ",
+      "createdAt": "2023-02-22T22:37:40Z",
+      "updatedAt": "2023-02-23T16:34:59Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "4bc4e894de45686dbd4e3f05e2c4ca70ff502b3e",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "issue-22",
+      "headRefOid": "73b2bd07a987f7e1bc7aff4f1a59afd763c3e368",
+      "closedAt": "2023-02-23T16:34:59Z",
+      "mergedAt": "2023-02-23T16:34:58Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "39e0da9e1dc7cabb5e2f428244e6fc1ec5eac340"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHulKFM5OHEuS",
+          "commit": {
+            "abbreviatedOid": "73b2bd0"
+          },
+          "author": "smishra1200",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Hi Thomas - Your changes for Kevin's comment look good. They cover all the open question including the new clarifying text in the Security Considertations.",
+          "createdAt": "2023-02-23T00:37:02Z",
+          "updatedAt": "2023-02-23T00:37:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOHulKFM5KjugH",
+      "title": "lifetime => star-lifetime",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/25",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #23 ",
+      "createdAt": "2023-02-22T22:38:21Z",
+      "updatedAt": "2023-02-23T16:34:07Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "4bc4e894de45686dbd4e3f05e2c4ca70ff502b3e",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "issue-23",
+      "headRefOid": "93b53d0c8296553c6d13c411ee6275e2d97491b0",
+      "closedAt": "2023-02-23T16:34:07Z",
+      "mergedAt": "2023-02-23T16:34:07Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "bae7006588adbc0ba43bbe3060ea637cb0b80623"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHulKFM5OHEWg",
+          "commit": {
+            "abbreviatedOid": "93b53d0"
+          },
+          "author": "smishra1200",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Hi Thomas - These changes look good to me. Thank you",
+          "createdAt": "2023-02-23T00:34:20Z",
+          "updatedAt": "2023-02-23T00:34:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOHulKFM5MFPkh",
+      "title": "Kevin fixes",
+      "url": "https://github.com/FredericFi/cdni-wg/pull/26",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-15T09:06:34Z",
+      "updatedAt": "2023-03-15T14:04:07Z",
+      "baseRepository": "FredericFi/cdni-wg",
+      "baseRefName": "main",
+      "baseRefOid": "39e0da9e1dc7cabb5e2f428244e6fc1ec5eac340",
+      "headRepository": "FredericFi/cdni-wg",
+      "headRefName": "kevin-fixes",
+      "headRefOid": "8824a2049a2d50de14c652f334a089e0aad932e2",
+      "closedAt": "2023-03-15T14:04:07Z",
+      "mergedAt": "2023-03-15T14:04:07Z",
+      "mergedBy": "FredericFi",
+      "mergeCommit": {
+        "oid": "eed28f8526b60bb4a41133c5d437c53e13013374"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
