@@ -56,7 +56,7 @@ normative:
   RFC9325:
 
 informative:
-  RFC7336:    
+  RFC7336:
 
 entity:
   SELF: "RFCthis"
