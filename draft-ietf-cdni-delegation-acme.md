@@ -64,8 +64,8 @@ entity:
 --- abstract
 
 This document defines metadata to support delegating the delivery of
-HTTPS content between two or more interconnected CDNs.  Specifically, this
-document defines a CDNI Metadata interface object to enable delegation of
+HTTPS content between two or more interconnected Content Delivery Networks (CDNs).  Specifically, this
+document defines a Content Delivery Network Interconnection (CDNI) Metadata interface object to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
 RFC9115. RFC9115 allows delegating entities to remain in full
 control of the delegation and be able to revoke it any time and this avoids
@@ -75,7 +75,7 @@ the need to share private cryptographic key material between the involved entiti
 
 # Introduction
 
-Content delivery over HTTPS using two or more cooperating Content Delivery Networks (CDNs) along the path requires
+Content delivery over HTTPS using two or more cooperating CDNs along the path requires
 credential management, specifically when DNS-based redirection is used.  In such cases, an upstream CDN (uCDN) needs to delegate its credentials to a downstream (dCDN) for content delivery.
 
 {{RFC9115}} defines delegation methods that allow a uCDN on behalf of the content provider, the holder of the domain, to generate on-demand an X.509
@@ -86,11 +86,8 @@ This document defines CDNI Metadata to make use of HTTPS delegation between a
 uCDN and a dCDN based on the mechanism specified in {{RFC9115}}.  Furthermore,
 it adds a delegation method to the "CDNI Payload Types" IANA registry.
 
-{{terminology}} defines terminology used in this document.  {{fci-metadata}}
-presents delegation metadata for the FCI interface.  {{mi-metadata}} addresses
-the metadata for handling HTTPS delegation with the Metadata Interface.
-{{iana}} addresses IANA registry for delegation methods.  {{sec}} covers the
-security considerations.
+{{fci-metadata}} presents delegation metadata for the Footprint & Capabilities Advertisement interface (FCI).  {{mi-metadata}} addresses the metadata for handling HTTPS delegation with the Metadata Interface.
+
 
 ## Terminology {#terminology}
 
@@ -98,7 +95,7 @@ This document uses terminology from CDNI framework documents such as: CDNI
 framework document {{RFC7336}} and CDNI
 interface specifications documents: CDNI Metadata interface {{RFC8006}} and
 CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
-{{Section 1.1 of RFC8739}}.
+{{Section 1.2 of RFC8739}} and {{Section 1.1 of RFC9115}}.
 
 {::boilerplate bcp14}
 
@@ -107,8 +104,8 @@ CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also us
 The Footprint and Capabilities Advertisement interface (FCI) defined in {{RFC8008}} allows a
 dCDN to send a FCI capability type object to a uCDN.
 
-The FCI.Metadata object allows a dCDN to advertise the capabilities
-regarding the supported delegation methods and their configuration.
+This document uses the CDNI Metadata capability object serialization from {{RFC8008}} for a CDN that supports 
+delegation methods.
 
 The following is an example of the supported delegated methods capability
 object for a dCDN implementing the ACME delegation method.
@@ -120,11 +117,11 @@ object for a dCDN implementing the ACME delegation method.
       "capability-type": "FCI.Metadata",
       "capability-value": {
         "metadata": [
-          "ACMEDelegationMethod",
-          "... Other supported delegation methods ..."
+          // list of supported delegation methods
+          "ACMEDelegationMethod"
         ]
       },
-      "footprints": [
+      "footprints": [ 
         "Footprint objects"
       ]
     }
@@ -148,7 +145,7 @@ non-STAR delegation, which allows delegation between CDNs using long-term
 certificates {{Section 2.3.3 of RFC9115}}.
 
 {{fig-call-flow}} provides a high-level view of the combined CDNI and ACME
-delegation message flows to obtain STAR certificate bound to the origin's name.
+delegation message flows to obtain STAR certificate from the Certificate Authority (CA) bound to the Content Provider's (CP) name.
 
 ~~~aasvg
 .----.                .----.               .----.                 .----.
@@ -194,18 +191,21 @@ delegation message flows to obtain STAR certificate bound to the origin's name.
 {: #fig-call-flow artwork-align="center"
    title="Example call-flow of STAR delegation in CDNI showing 2 levels of delegation"}
 
+* Note: in the future, the SVCB/HTTPS records may be considered in addition of CNAME as defined in {{section 2.3.1.3, RFC9115}}. 
+
+
 {{acmedeleobj}} defines the objects used for bootstrapping the ACME delegation
 method between a uCDN and a delegate dCDN.
 
 ## ACMEDelegationMethod Object {#acmedeleobj}
 
-The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by the presence (or absence) of the "star-lifetime" property. That is, the presence of the "star-lifetime" property explicitly means a short-term delegation with lifetime of the certificate based on that property (and the optional "star-lifetime-adjust" attribute). A non-STAR delegation will not have the "star-lifetime" property in the delegation.  See also the examples in {{examples}}.
+The ACMEDelegationMethod object allows a uCDN to define both STAR and non-STAR delegation. The dCDN, the consumer of the delegation, can determine the type of delegation by the presence (or absence) of the "lifetime" property. That is, the presence of the "lifetime" property explicitly means a short-term delegation with lifetime of the certificate based on that property (and the optional "lifetime-adjust" attribute). A non-STAR delegation will not have the "lifetime" property in the delegation.  See also the examples in {{examples}}.
 
 The ACMEDelegationMethod object is defined with the properties shown below.
 
 * Property: acme-delegation
 
-  * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1.3 of RFC9115}} for the details).
+  * Description: a URL pointing at an ACME delegation object, either STAR or non-STAR, associated with the dCDN account on the uCDN ACME server (see {{Section 2.3.1.3 of RFC9115}} for the details). The URL MUST use the https scheme.
   * Type: String
   * Mandatory-to-Specify: Yes
 
@@ -215,15 +215,15 @@ The ACMEDelegationMethod object is defined with the properties shown below.
   * Type: TimeWindow
   * Mandatory-to-Specify: Yes
 
-* Property: star-lifetime
+* Property: lifetime
 
-  * Description: See {{Section 3.1.1 of RFC8739}}
+  * Description: See lifetime in {{Section 3.1.1 of RFC8739}}
   * Type: Integer
   * Mandatory-to-Specify: Yes, only if a STAR delegation method is specified
 
-* Property: star-lifetime-adjust
+* Property: lifetime-adjust
 
-  * Description: See {{Section 3.1.1 of RFC8739}}
+  * Description: See lifetime-adjust in {{Section 3.1.1 of RFC8739}}
   * Type: Integer
   * Mandatory-to-Specify: No
 
@@ -241,8 +241,8 @@ ACME delegation.
       "start": 1665417434,
       "end": 1665676634
     },
-    "star-lifetime": 345600,
-    "star-lifetime-adjust": 259200
+    "lifetime": 345600,
+    "lifetime-adjust": 259200
   }
 }
 ~~~
