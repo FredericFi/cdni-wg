@@ -104,7 +104,7 @@ CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also us
 The Footprint and Capabilities Advertisement interface (FCI) defined in {{RFC8008}} allows a
 dCDN to send a FCI capability type object to a uCDN.
 
-This document uses the CDNI Metadata capability object serialization from {{RFC8008}} for a CDN that supports 
+This document uses the CDNI Metadata capability object serialization from {{RFC8008}} for a CDN that supports
 delegation methods.
 
 The following is an example of the supported delegated methods capability
@@ -121,7 +121,7 @@ object for a dCDN implementing the ACME delegation method.
           "ACMEDelegationMethod"
         ]
       },
-      "footprints": [ 
+      "footprints": [
         "Footprint objects"
       ]
     }
@@ -142,7 +142,7 @@ describes metadata for using the ACME delegation interface {{RFC9115}}.
 The ACMEDelegationMethod applies to both ACME STAR delegation, which provides a
 delegation model based on short-term certificates with automatic renewal ({{Section 2.3.2 of RFC9115}}), and
 non-STAR delegation, which allows delegation between CDNs using long-term
-certificates {{Section 2.3.3 of RFC9115}}.
+certificates ({{Section 2.3.3 of RFC9115}}).
 
 {{fig-call-flow}} provides a high-level view of the combined CDNI and ACME
 delegation message flows to obtain STAR certificate from the Certificate Authority (CA) bound to the Content Provider's (CP) name.
@@ -191,8 +191,8 @@ delegation message flows to obtain STAR certificate from the Certificate Authori
 {: #fig-call-flow artwork-align="center"
    title="Example call-flow of STAR delegation in CDNI showing 2 levels of delegation"}
 
-* Note: in the future, the SVCB/HTTPS records may be considered in addition of CNAME as defined in {{section 2.3.1.3, RFC9115}}. 
-
+{:aside}
+> Note: The delegation object defined in {{Section 2.3.1.3 of RFC9115}} only allows to specify DNS mappings using CNAME RRs.  A future document updating {{RFC9115}} could expand the delegation object to also include SVCB/HTTPS-based {{?RFC9460}} mappings.
 
 {{acmedeleobj}} defines the objects used for bootstrapping the ACME delegation
 method between a uCDN and a delegate dCDN.
