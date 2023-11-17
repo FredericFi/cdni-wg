@@ -5,9 +5,9 @@
 Content Delivery Networks Interconnection                  F. Fieau, Ed.
 Internet-Draft                                                E. Stephan
 Intended status: Standards Track                                  Orange
-Expires: 25 February 2024                                      S. Mishra
+Expires: 20 May 2024                                           S. Mishra
                                                                  Verizon
-                                                          24 August 2023
+                                                        17 November 2023
 
 
    CDNI delegation using Automated Certificate Management Environment
@@ -16,9 +16,10 @@ Expires: 25 February 2024                                      S. Mishra
 Abstract
 
    This document defines metadata to support delegating the delivery of
-   HTTPS content between two or more interconnected CDNs.  Specifically,
-   this document defines a CDNI Metadata interface object to enable
-   delegation of X.509 certificates leveraging delegation schemes
+   HTTPS content between two or more interconnected Content Delivery
+   Networks (CDNs).  Specifically, this document defines a Content
+   Delivery Network Interconnection (CDNI) Metadata interface object to
+   enable delegation of X.509 certificates leveraging delegation schemes
    defined in RFC9115.  RFC9115 allows delegating entities to remain in
    full control of the delegation and be able to revoke it any time and
    this avoids the need to share private cryptographic key material
@@ -55,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 February 2024.
+   This Internet-Draft will expire on 20 May 2024.
 
 Copyright Notice
 
@@ -90,11 +91,10 @@ Table of Contents
 
 1.   Introduction
 
-   Content delivery over HTTPS using two or more cooperating Content
-   Delivery Networks (CDNs) along the path requires credential
-   management, specifically when DNS-based redirection is used.  In such
-   cases, an upstream CDN (uCDN) needs to delegate its credentials to a
-   downstream (dCDN) for content delivery.
+   Content delivery over HTTPS using two or more cooperating CDNs along
+   the path requires credential management, specifically when DNS-based
+   redirection is used.  In such cases, an upstream CDN (uCDN) needs to
+   delegate its credentials to a downstream (dCDN) for content delivery.
 
    [RFC9115] defines delegation methods that allow a uCDN on behalf of
    the content provider, the holder of the domain, to generate on-demand
@@ -107,11 +107,9 @@ Table of Contents
    [RFC9115].  Furthermore, it adds a delegation method to the "CDNI
    Payload Types" IANA registry.
 
-   Section 1.1 defines terminology used in this document.  Section 2
-   presents delegation metadata for the FCI interface.  Section 3
-   addresses the metadata for handling HTTPS delegation with the
-   Metadata Interface.  Section 4 addresses IANA registry for delegation
-   methods.  Section 5 covers the security considerations.
+   Section 2 presents delegation metadata for the Footprint &
+   Capabilities Advertisement interface (FCI).  Section 3 addresses the
+   metadata for handling HTTPS delegation with the Metadata Interface.
 
 1.1.  Terminology
 
@@ -119,7 +117,8 @@ Table of Contents
    CDNI framework document [RFC7336] and CDNI interface specifications
    documents: CDNI Metadata interface [RFC8006] and CDNI Footprint and
    Capabilities Advertisement interface [RFC8008].  It also uses
-   terminology from Section 1.1 of [RFC8739].
+   terminology from Section 1.2 of [RFC8739] and Section 1.1 of
+   [RFC9115].
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -133,8 +132,8 @@ Table of Contents
    in [RFC8008] allows a dCDN to send a FCI capability type object to a
    uCDN.
 
-   The FCI.Metadata object allows a dCDN to advertise the capabilities
-   regarding the supported delegation methods and their configuration.
+   This document uses the CDNI Metadata capability object serialization
+   from [RFC8008] for a CDN that supports delegation methods.
 
    The following is an example of the supported delegated methods
    capability object for a dCDN implementing the ACME delegation method.
@@ -145,8 +144,8 @@ Table of Contents
          "capability-type": "FCI.Metadata",
          "capability-value": {
            "metadata": [
-             "ACMEDelegationMethod",
-             "... Other supported delegation methods ..."
+             // list of supported delegation methods
+             "ACMEDelegationMethod"
            ]
          },
          "footprints": [
@@ -171,11 +170,11 @@ Table of Contents
    provides a delegation model based on short-term certificates with
    automatic renewal (Section 2.3.2 of [RFC9115]), and non-STAR
    delegation, which allows delegation between CDNs using long-term
-   certificates Section 2.3.3 of [RFC9115].
+   certificates (Section 2.3.3 of [RFC9115]).
 
    Figure 1 provides a high-level view of the combined CDNI and ACME
-   delegation message flows to obtain STAR certificate bound to the
-   origin's name.
+   delegation message flows to obtain STAR certificate from the
+   Certificate Authority (CA) bound to the Content Provider's (CP) name.
 
 .----.                .----.               .----.                 .----.
 |dCDN|                |uCDN|               | CP |                 | CA |
@@ -220,6 +219,12 @@ Table of Contents
    Figure 1: Example call-flow of STAR delegation in CDNI showing 2
                          levels of delegation
 
+      |  Note: The delegation object defined in Section 2.3.1.3 of
+      |  [RFC9115] only allows to specify DNS mappings using CNAME RRs.
+      |  A future document updating [RFC9115] could expand the
+      |  delegation object to also include SVCB/HTTPS-based [RFC9460]
+      |  mappings.
+
    Section 3.1 defines the objects used for bootstrapping the ACME
    delegation method between a uCDN and a delegate dCDN.
 
@@ -228,12 +233,12 @@ Table of Contents
    The ACMEDelegationMethod object allows a uCDN to define both STAR and
    non-STAR delegation.  The dCDN, the consumer of the delegation, can
    determine the type of delegation by the presence (or absence) of the
-   "star-lifetime" property.  That is, the presence of the "star-
-   lifetime" property explicitly means a short-term delegation with
-   lifetime of the certificate based on that property (and the optional
-   "star-lifetime-adjust" attribute).  A non-STAR delegation will not
-   have the "star-lifetime" property in the delegation.  See also the
-   examples in Section 3.1.1.
+   "lifetime" property.  That is, the presence of the "lifetime"
+   property explicitly means a short-term delegation with lifetime of
+   the certificate based on that property (and the optional "lifetime-
+   adjust" attribute).  A non-STAR delegation will not have the
+   "lifetime" property in the delegation.  See also the examples in
+   Section 3.1.1.
 
    The ACMEDelegationMethod object is defined with the properties shown
    below.
@@ -243,7 +248,7 @@ Table of Contents
       -  Description: a URL pointing at an ACME delegation object,
          either STAR or non-STAR, associated with the dCDN account on
          the uCDN ACME server (see Section 2.3.1.3 of [RFC9115] for the
-         details).
+         details).  The URL MUST use the https scheme.
 
       -  Type: String
 
@@ -265,18 +270,18 @@ Table of Contents
 
       -  Mandatory-to-Specify: Yes
 
-   *  Property: star-lifetime
+   *  Property: lifetime
 
-      -  Description: See Section 3.1.1 of [RFC8739]
+      -  Description: See lifetime in Section 3.1.1 of [RFC8739]
 
       -  Type: Integer
 
       -  Mandatory-to-Specify: Yes, only if a STAR delegation method is
          specified
 
-   *  Property: star-lifetime-adjust
+   *  Property: lifetime-adjust
 
-      -  Description: See Section 3.1.1 of [RFC8739]
+      -  Description: See lifetime-adjust in Section 3.1.1 of [RFC8739]
 
       -  Type: Integer
 
@@ -295,8 +300,8 @@ Table of Contents
          "start": 1665417434,
          "end": 1665676634
        },
-       "star-lifetime": 345600,
-       "star-lifetime-adjust": 259200
+       "lifetime": 345600,
+       "lifetime-adjust": 259200
      }
    }
 
@@ -419,6 +424,11 @@ Table of Contents
               "Framework for Content Distribution Network
               Interconnection (CDNI)", RFC 7336, DOI 10.17487/RFC7336,
               August 2014, <https://www.rfc-editor.org/rfc/rfc7336>.
+
+   [RFC9460]  Schwartz, B., Bishop, M., and E. Nygren, "Service Binding
+              and Parameter Specification via the DNS (SVCB and HTTPS
+              Resource Records)", RFC 9460, DOI 10.17487/RFC9460,
+              November 2023, <https://www.rfc-editor.org/rfc/rfc9460>.
 
 Acknowledgments
 
