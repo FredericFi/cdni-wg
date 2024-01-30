@@ -13,31 +13,29 @@
 HTTPS content between two or more interconnected Content Delivery Networks (CDNs).  Specifically, this
 document defines a Content Delivery Network Interconnection (CDNI) Metadata interface object to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
-RFC9115. RFC9115 allows delegating entities to remain in full
-control of the delegation and be able to revoke it any time and this avoids
-the need to share private cryptographic key material between the involved entities. 
+RFC9115. Per RFC 9115, delegating entities can remain in full control of the delegation and can revoke it at any time. This avoids the need to share private cryptographic key material between the involved entities. 
     " name="description">
-<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="xml2rfc 3.19.1" name="generator">
 <meta content="HTTPS" name="keyword">
 <meta content="delegation" name="keyword">
 <meta content="ACME" name="keyword">
 <meta content="STAR" name="keyword">
 <meta content="draft-ietf-cdni-delegation-acme-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.2
+  xml2rfc 3.19.1
     Python 3.11.6
-    ConfigArgParse 1.5.3
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.1.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.9
+    wcwidth 0.2.13
 -->
 <link href="draft-ietf-cdni-delegation-acme.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1036,11 +1034,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CDNI delegation using ACME</td>
-<td class="right">November 2023</td>
+<td class="right">January 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Fieau, et al.</td>
-<td class="center">Expires 20 May 2024</td>
+<td class="center">Expires 2 August 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1053,12 +1051,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-cdni-delegation-acme-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-11-17" class="published">17 November 2023</time>
+<time datetime="2024-01-30" class="published">30 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-05-20">20 May 2024</time></dd>
+<dd class="expires"><time datetime="2024-08-02">2 August 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1084,9 +1082,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 HTTPS content between two or more interconnected Content Delivery Networks (CDNs).  Specifically, this
 document defines a Content Delivery Network Interconnection (CDNI) Metadata interface object to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
-RFC9115. RFC9115 allows delegating entities to remain in full
-control of the delegation and be able to revoke it any time and this avoids
-the need to share private cryptographic key material between the involved entities.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+RFC9115. Per RFC 9115, delegating entities can remain in full control of the delegation and can revoke it at any time. This avoids the need to share private cryptographic key material between the involved entities.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1122,7 +1118,7 @@ the need to share private cryptographic key material between the involved entiti
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 May 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 2 August 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1131,7 +1127,7 @@ the need to share private cryptographic key material between the involved entiti
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2023 IETF Trust and the persons identified as the
+            Copyright (c) 2024 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1230,7 +1226,7 @@ it adds a delegation method to the "CDNI Payload Types" IANA registry.<a href="#
 framework document <span>[<a href="#RFC7336" class="cite xref">RFC7336</a>]</span> and CDNI
 interface specifications documents: CDNI Metadata interface <span>[<a href="#RFC8006" class="cite xref">RFC8006</a>]</span> and
 CDNI Footprint and Capabilities Advertisement interface <span>[<a href="#RFC8008" class="cite xref">RFC8008</a>]</span>.  It also uses terminology from
-<span><a href="https://rfc-editor.org/rfc/rfc8739#section-1.2" class="relref">Section 1.2</a> of [<a href="#RFC8739" class="cite xref">RFC8739</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc9115#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<span><a href="https://rfc-editor.org/rfc/rfc8739#section-1.2" class="relref">Section 1.2</a> of [<a href="#RFC8739" class="cite xref">RFC8739</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc9115#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>, including Short-Term, Automatically Renewed (STAR), as applied to X.509 certificates.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
 NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
 "MAY", and "OPTIONAL" in this document are to be interpreted as
@@ -1429,7 +1425,7 @@ delegation message flows to obtain STAR certificate from the Certificate Authori
         </figcaption></figure>
 </div>
 <aside id="section-3-6">
-        <p id="section-3-6.1">Note: The delegation object defined in <span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1.3" class="relref">Section 2.3.1.3</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span> only allows to specify DNS mappings using CNAME RRs.  A future document updating <span>[<a href="#RFC9115" class="cite xref">RFC9115</a>]</span> could expand the delegation object to also include SVCB/HTTPS-based <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> mappings.<a href="#section-3-6.1" class="pilcrow">¶</a></p>
+        <p id="section-3-6.1">Note: The delegation object defined in <span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1.3" class="relref">Section 2.3.1.3</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span> only allows DNS mappings to be specified using CNAME RRs.  A future document updating <span>[<a href="#RFC9115" class="cite xref">RFC9115</a>]</span> could expand the delegation object to also include SVCB/HTTPS-based <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> mappings.<a href="#section-3-6.1" class="pilcrow">¶</a></p>
 </aside>
 <p id="section-3-7"><a href="#acmedeleobj" class="auto internal xref">Section 3.1</a> defines the objects used for bootstrapping the ACME delegation
 method between a uCDN and a delegate dCDN.<a href="#section-3-7" class="pilcrow">¶</a></p>
@@ -1601,19 +1597,16 @@ MI objects (and any associated capability advertisement)<a href="#section-4.1-1.
 <p id="section-5-1">The metadata object defined in this document does not introduce any new
 security or privacy concerns over those already discussed in <span>[<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>,
 <span>[<a href="#RFC8006" class="cite xref">RFC8006</a>]</span> and <span>[<a href="#RFC8008" class="cite xref">RFC8008</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The reader is expected to understand the ACME delegation trust model (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>) and security goal (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>), in particular
-the criticality around the protection of the user account associated with the
-delegation, which authorizes all the security relevant operations between dCDN
-and uCDN over the ACME channel.
-The dCDN's ACME account is also relevant to the privacy of the entire scheme;
+<p id="section-5-2">The reader is expected to understand the ACME delegation trust model (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>) and security goal (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>).]). In particular, the reader is expected to understand the criticality of the protection of the user account associated with the delegation; this account authorizes all the security-relevant operations between a dCDN and a uCDN over the ACME channel.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">The dCDN's ACME account is also relevant to the privacy of the entire scheme;
 for example, the <code>acme-delegation</code> resource in the Metadata object is only
 accessible to the holder of the account key, who is allowed to fetch its
-content exclusively via POST-as-GET (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1.2" class="relref">Section 2.3.1.2</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>).<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">In addition, the Metadata interface authentication and confidentiality
-requirements defined in <span><a href="https://rfc-editor.org/rfc/rfc8006#section-8" class="relref">Section 8</a> of [<a href="#RFC8006" class="cite xref">RFC8006</a>]</span> MUST be followed.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">Implementers MUST adhere to the security considerations defined in the CDNI Request Routing: Footprint and Capabilities Semantics, <span><a href="https://rfc-editor.org/rfc/rfc8008#section-7" class="relref">Section 7</a> of [<a href="#RFC8008" class="cite xref">RFC8008</a>]</span>.<a href="#section-5-4" class="pilcrow">¶</a></p>
-<p id="section-5-5">When TLS is used to achieve the above security objectives, the general TLS
-usage guidance in <span>[<a href="#RFC9325" class="cite xref">RFC9325</a>]</span> MUST be followed.<a href="#section-5-5" class="pilcrow">¶</a></p>
+content exclusively via POST-as-GET (<span><a href="https://rfc-editor.org/rfc/rfc9115#section-2.3.1.2" class="relref">Section 2.3.1.2</a> of [<a href="#RFC9115" class="cite xref">RFC9115</a>]</span>).<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">In addition, the Metadata interface authentication and confidentiality
+requirements defined in <span><a href="https://rfc-editor.org/rfc/rfc8006#section-8" class="relref">Section 8</a> of [<a href="#RFC8006" class="cite xref">RFC8006</a>]</span> MUST be followed.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">Implementers MUST adhere to the security considerations defined in the CDNI Request Routing: Footprint and Capabilities Semantics, <span><a href="https://rfc-editor.org/rfc/rfc8008#section-7" class="relref">Section 7</a> of [<a href="#RFC8008" class="cite xref">RFC8008</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">When TLS is used to achieve the above security objectives, the general TLS
+usage guidance in <span>[<a href="#RFC9325" class="cite xref">RFC9325</a>]</span> MUST be followed.<a href="#section-5-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <section id="section-6">
