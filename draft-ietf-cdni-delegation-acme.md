@@ -67,9 +67,8 @@ This document defines metadata to support delegating the delivery of
 HTTPS content between two or more interconnected Content Delivery Networks (CDNs).  Specifically, this
 document defines a Content Delivery Network Interconnection (CDNI) Metadata interface object to enable delegation of
 X.509 certificates leveraging delegation schemes defined in
-RFC9115. RFC9115 allows delegating entities to remain in full
-control of the delegation and be able to revoke it any time and this avoids
-the need to share private cryptographic key material between the involved entities.
+RFC9115. Per RFC 9115, delegating entities can remain in full control of the delegation and can revoke it at any time. This avoids the need to share private cryptographic key material between the involved entities.
+
 
 --- middle
 
@@ -95,8 +94,8 @@ This document uses terminology from CDNI framework documents such as: CDNI
 framework document {{RFC7336}} and CDNI
 interface specifications documents: CDNI Metadata interface {{RFC8006}} and
 CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
-{{Section 1.2 of RFC8739}} and {{Section 1.1 of RFC9115}}.
-
+{{Section 1.2 of RFC8739}} and {{Section 1.1 of RFC9115}}, including Short-Term, Automatically Renewed (STAR), as applied to X.509 certificates.
+   
 {::boilerplate bcp14}
 
 # Advertising Delegation Metadata for CDNI through FCI {#fci-metadata}
@@ -192,7 +191,7 @@ delegation message flows to obtain STAR certificate from the Certificate Authori
    title="Example call-flow of STAR delegation in CDNI showing 2 levels of delegation"}
 
 {:aside}
-> Note: The delegation object defined in {{Section 2.3.1.3 of RFC9115}} only allows to specify DNS mappings using CNAME RRs.  A future document updating {{RFC9115}} could expand the delegation object to also include SVCB/HTTPS-based {{?RFC9460}} mappings.
+> Note: The delegation object defined in {{Section 2.3.1.3 of RFC9115}} only allows DNS mappings to be specified using CNAME RRs.  A future document updating {{RFC9115}} could expand the delegation object to also include SVCB/HTTPS-based {{?RFC9460}} mappings.
 
 {{acmedeleobj}} defines the objects used for bootstrapping the ACME delegation
 method between a uCDN and a delegate dCDN.
@@ -295,10 +294,8 @@ security or privacy concerns over those already discussed in {{RFC9115}},
 {{RFC8006}} and {{RFC8008}}.
 
 The reader is expected to understand the ACME delegation trust model ({{Section
-7.1 of RFC9115}}) and security goal ({{Section 7.2 of RFC9115}}), in particular
-the criticality around the protection of the user account associated with the
-delegation, which authorizes all the security relevant operations between dCDN
-and uCDN over the ACME channel.
+7.1 of RFC9115}}) and security goal ({{Section 7.2 of RFC9115}}).]). In particular, the reader is expected to understand the criticality of the protection of the user account associated with the delegation; this account authorizes all the security-relevant operations between a dCDN and a uCDN over the ACME channel.
+
 The dCDN's ACME account is also relevant to the privacy of the entire scheme;
 for example, the `acme-delegation` resource in the Metadata object is only
 accessible to the holder of the account key, who is allowed to fetch its
