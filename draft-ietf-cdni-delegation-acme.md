@@ -95,7 +95,7 @@ framework document {{RFC7336}} and CDNI
 interface specifications documents: CDNI Metadata interface {{RFC8006}} and
 CDNI Footprint and Capabilities Advertisement interface {{RFC8008}}.  It also uses terminology from
 {{Section 1.2 of RFC8739}} and {{Section 1.1 of RFC9115}}, including Short-Term, Automatically Renewed (STAR), as applied to X.509 certificates.
-   
+
 {::boilerplate bcp14}
 
 # Advertising Delegation Metadata for CDNI through FCI {#fci-metadata}
